@@ -3,7 +3,8 @@ namespace Nodes\Assets\Upload\Provider;
 
 use Aws\Common\Aws;
 use Nodes\Assets\Upload\AbstractUploadProvider;
-use Nodes\Assets\Upload\Exception\AssetUploadFailedException;
+use Nodes\Assets\Upload\Exception\AssetsBadRequestException;
+use Nodes\Assets\Upload\Exception\AssetsUploadFailedException;
 use Nodes\Assets\Upload\Settings;
 use Nodes\Exception\Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -29,7 +30,7 @@ class AmazonS3 extends AbstractUploadProvider
     public function __construct(array $s3Config)
     {
         if (empty($s3Config) || $s3Config['key'] == 'your-key') {
-            throw new Exception('Missing credentials for s3 - These can be found in config/filesystems');
+            throw new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems');
         }
 
         $this->s3 = Aws::factory($s3Config)->get('s3');
@@ -42,7 +43,7 @@ class AmazonS3 extends AbstractUploadProvider
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param \Nodes\Assets\Upload\Settings                       $settings
      * @return string
-     * @throws \Nodes\Assets\Upload\Exception\AssetUploadFailedException
+     * @throws \Nodes\Assets\Upload\Exception\AssetsUploadFailedException
      */
     protected function store(UploadedFile $uploadedFile, Settings $settings)
     {
@@ -59,7 +60,7 @@ class AmazonS3 extends AbstractUploadProvider
             ]);
 
         } catch (\Exception $e) {
-            throw new AssetUploadFailedException('Could not upload file to Amazon S3. Reason: ' . $e->getMessage());
+            throw new AssetsUploadFailedException('Could not upload file to Amazon S3. Reason: ' . $e->getMessage());
         }
 
         return $settings->getFilePath();

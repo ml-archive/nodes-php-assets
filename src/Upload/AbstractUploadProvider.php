@@ -4,8 +4,8 @@ namespace Nodes\Assets\Upload;
 use finfo;
 use Illuminate\Support\Str;
 use Nodes\Assets\Support\DataUri;
-use Nodes\Assets\Upload\Exception\AssetBadRequestException;
-use Nodes\Assets\Upload\Exception\AssetNoContentException;
+use Nodes\Assets\Upload\Exception\AssetsBadRequestException;
+use Nodes\Assets\Upload\Exception\AssetsNoContentException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -20,7 +20,8 @@ abstract class AbstractUploadProvider implements ProviderInterface
      * @author Casper Rasmussen <cr@nodes.dk>
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param \Nodes\Assets\Upload\Settings                       $settings
-     * @return mixed
+     * @return $path
+     * @throws \Nodes\Assets\Upload\Exception\AssetsUploadFailedException
      */
     protected abstract function store(UploadedFile $uploadedFile, Settings $settings);
 
@@ -29,8 +30,9 @@ abstract class AbstractUploadProvider implements ProviderInterface
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param                                                     $folder
      * @param \Nodes\Assets\Upload\Settings                       $settings
-     * @return mixed
-     * @throws \Nodes\Assets\Upload\Exception\AssetBadRequestException
+     * @return string $path
+     * @throws \Nodes\Assets\Upload\Exception\AssetsBadRequestException
+     * @throws \Nodes\Assets\Upload\Exception\AssetsUploadFailedException
      */
     public function addFromUpload(UploadedFile $uploadedFile, $folder, Settings $settings)
     {
@@ -62,14 +64,14 @@ abstract class AbstractUploadProvider implements ProviderInterface
      * @param                               $folder
      * @param \Nodes\Assets\Upload\Settings $settings
      * @return mixed
-     * @throws \Nodes\Assets\Upload\Exception\AssetBadRequestException
-     * @throws \Nodes\Assets\Upload\Exception\AssetNoContentException
+     * @throws \Nodes\Assets\Upload\Exception\AssetsBadRequestException
+     * @throws \Nodes\Assets\Upload\Exception\AssetsUploadFailedException
      */
     public function addFromUrl($url, $folder, Settings $settings)
     {
         $content = @file_get_contents($url);
         if (empty($content)) {
-            throw new AssetNoContentException('Could not stream content from given URL');
+            throw new AssetsBadRequestException('Could not stream content from given URL');
         }
 
         // Write content to temporary file
@@ -113,17 +115,18 @@ abstract class AbstractUploadProvider implements ProviderInterface
      * @param                               $folder
      * @param \Nodes\Assets\Upload\Settings $settings
      * @return mixed
-     * @throws \Nodes\Assets\Upload\Exception\AssetBadRequestException
-     * @throws \Nodes\Assets\Upload\Exception\AssetNoContentException
+     * @throws \Nodes\Assets\Upload\Exception\AssetsBadRequestException
+     * @throws \Nodes\Assets\Upload\Exception\AssetsUploadFailedException
      */
     public function addFromDataUri($dataUri, $folder, Settings $settings)
     {
 
         $dataUriObject = null;
         if(!DataUri::tryParse($dataUri, $dataUriObject)) {
-            throw new AssetNoContentException('Could not stream the content');
+            throw new AssetsBadRequestException('Could not stream the content');
         }
 
+        // Retrieve the data
         $content = $dataUriObject->getEncodedData();
 
         // Write content to temporary file
@@ -161,7 +164,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
     /**
      * @author Casper Rasmussen <cr@nodes.dk>
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     * @return mixed|string
+     * @return string
      */
     protected function generateFilename(UploadedFile $uploadedFile)
     {
@@ -182,8 +185,8 @@ abstract class AbstractUploadProvider implements ProviderInterface
     /**
      * @author Casper Rasmussen <cr@nodes.dk>
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     * @return mixed
-     * @throws \Nodes\Assets\Upload\Exception\AssetBadRequestException
+     * @return string
+     * @throws \Nodes\Assets\Upload\Exception\AssetsBadRequestException
      */
     public function generateFileExtension(UploadedFile $uploadedFile)
     {
@@ -194,6 +197,6 @@ abstract class AbstractUploadProvider implements ProviderInterface
             return $fileInfo['extension'];
         }
 
-        throw new AssetBadRequestException('Cannot detect file extension, provide it before uploading');
+        throw new AssetsBadRequestException('Cannot detect file extension, provide it before uploading');
     }
 }

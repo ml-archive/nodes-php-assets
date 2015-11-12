@@ -4,11 +4,11 @@ namespace Nodes\Assets\Upload\Exception;
 use Nodes\Exception\Exception;
 
 /**
- * Class AssetNoContentException
+ * Class AssetsUploadFailedException
  *
- * @package Nodes\Asset\Exception
+ * @package Nodes\Assets\Exception
  */
-class AssetNoContentException extends Exception
+class AssetsUploadFailedException extends Exception
 {
     /**
      * Constructor
@@ -21,7 +21,7 @@ class AssetNoContentException extends Exception
      * @param  string  $statusCodeMessage
      * @param  boolean $report
      */
-    public function __construct($message, $statusCode = 415, $statusCodeMessage = null, $report = false)
+    public function __construct($message, $statusCode = 500, $statusCodeMessage = null, $report = false)
     {
         parent::__construct($message, $statusCode, $statusCodeMessage, $report);
     }
