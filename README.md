@@ -22,7 +22,7 @@ config/assetsv2/general
 ```
 
 
-#php4 functions
+#Global functions
 
 ```php
 function assets_add($file, $folder = null, UploadSettings $settings = null)
