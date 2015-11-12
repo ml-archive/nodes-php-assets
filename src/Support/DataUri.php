@@ -1,5 +1,5 @@
 <?php
-namespace Nodes\Assets\Support\Helpers;
+namespace Nodes\Assets\Support;
 
 /* The MIT License (MIT)
  * Copyright (c) 2015 FlyingTopHat (lucas@flyingtophat.co.uk)

@@ -13,7 +13,7 @@ use Nodes\Assets\Support\Facade\Assets;
  */
 class ServiceProvider extends NodesServiceProvider
 {
-//    protected $defer = true;
+    protected $defer = true;
 
     /**
      * Register the service provider.
@@ -26,6 +26,7 @@ class ServiceProvider extends NodesServiceProvider
     {
         $this->registerManager();
         $this->setupBindings();
+        $this->loadHelpers(__DIR__ . DIRECTORY_SEPARATOR . 'Support' . DIRECTORY_SEPARATOR . 'Helpers' . DIRECTORY_SEPARATOR);
         $this->registerFacade();
     }
 
@@ -38,8 +39,6 @@ class ServiceProvider extends NodesServiceProvider
      */
     protected function setupBindings()
     {
-        require_once(__DIR__ . '/Shortcuts.php');
-
         $this->app->bind('Nodes\Assets\Manager', function ($app) {
             return $app['nodes.assets'];
         });
@@ -52,8 +51,8 @@ class ServiceProvider extends NodesServiceProvider
     {
         $this->app->bindShared('nodes.assets', function ($app) {
 
-            $uploadProvider = $this->prepareConfigInstance(config('nodes.assetsv2.general.upload.provider'));
-            $urlProvider = $this->prepareConfigInstance(config('nodes.assetsv2.general.url.provider'));
+            $uploadProvider = call_user_func(config('nodes.assetsv2.general.upload.provider'), $app);
+            $urlProvider = call_user_func(config('nodes.assetsv2.general.url.provider'), $app);
 
             return new Manager($uploadProvider, $urlProvider);
         });
@@ -68,17 +67,5 @@ class ServiceProvider extends NodesServiceProvider
             $loader = AliasLoader::getInstance();
             $loader->alias('Assets', Assets::class);
         });
-    }
-
-    // TODO REMOVE
-    private function prepareConfigInstance($instance)
-    {
-        if (is_callable($instance)) {
-            return call_user_func($instance, app());
-        } elseif (is_string($instance)) {
-            return app($instance);
-        } else {
-            return $instance;
-        }
     }
 }

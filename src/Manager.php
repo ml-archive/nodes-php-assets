@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Manager
- * @author  Casper Rasmussen <cr@nodes.dk>
  *
+ * @author  Casper Rasmussen <cr@nodes.dk>
  * @package Nodes\Assets
  */
 class Manager
@@ -26,9 +26,10 @@ class Manager
         $this->urlProvider = $urlProvider;
     }
 
-    public function addFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null) {
+    public function addFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null)
+    {
         // Generate settings
-        if(!$settings) {
+        if (!$settings) {
             $settings = new UploadSettings();
         }
 
@@ -37,18 +38,18 @@ class Manager
     }
 
 
-
-    public function addFromDataUri($dataUri, $folder = null, UploadSettings $settings = null) {
+    public function addFromDataUri($dataUri, $folder = null, UploadSettings $settings = null)
+    {
         if (empty($dataUri)) {
             return null;
         }
 
-        if(!is_string($dataUri) || !DataUri::isParsable($dataUri)) {
+        if (!is_string($dataUri) || !DataUri::isParsable($dataUri)) {
             throw new AssetBadRequestException('The passed data uri is not valid data:[<mediatype>][;base64],<data>');
         }
 
         // Generate settings
-        if(!$settings) {
+        if (!$settings) {
             $settings = new UploadSettings();
         }
 
@@ -56,18 +57,19 @@ class Manager
         return $this->uploadProvider->addFromDataUri($dataUri, $folder, $settings);
     }
 
-    public function addFromUrl($url, $folder = null, UploadSettings $settings = null) {
+    public function addFromUrl($url, $folder = null, UploadSettings $settings = null)
+    {
 
         if (empty($url)) {
             return null;
         }
 
-        if(!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new AssetBadRequestException('The passed url is not a valid url');
         }
 
         // Generate settings
-        if(!$settings) {
+        if (!$settings) {
             $settings = new UploadSettings();
         }
 
@@ -106,7 +108,7 @@ class Manager
         $url = $this->urlProvider->getUrlFromPath($path);
 
         // Validate file URL
-        if ( ! filter_var($url, FILTER_VALIDATE_URL)) {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return null;
         }
 

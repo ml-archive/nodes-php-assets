@@ -3,7 +3,7 @@ namespace Nodes\Assets\Upload;
 
 use finfo;
 use Illuminate\Support\Str;
-use Nodes\Assets\Support\Helpers\DataUri;
+use Nodes\Assets\Support\DataUri;
 use Nodes\Assets\Upload\Exception\AssetBadRequestException;
 use Nodes\Assets\Upload\Exception\AssetNoContentException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
