@@ -8,17 +8,15 @@ use Nodes\Assets\Support\Facade\Assets;
 /**
  * Class ServiceProvider
  *
- * @author  Casper Rasmussen <cr@nodes.dk>
  * @package Nodes\Assets
  */
 class ServiceProvider extends NodesServiceProvider
 {
-    protected $defer = true;
-
     /**
      * Register the service provider.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
      * @access public
      * @return void
      */
@@ -33,7 +31,8 @@ class ServiceProvider extends NodesServiceProvider
     /**
      * Setup container binding
      *
-     * @author Morten Rugaard <moru@nodes.dk>
+     * @author Casper Rasmussen <moru@nodes.dk>
+     *
      * @access protected
      * @return void
      */
@@ -45,7 +44,12 @@ class ServiceProvider extends NodesServiceProvider
     }
 
     /**
+     * Register assets manager
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return void
      */
     public function registerManager()
     {
@@ -59,7 +63,12 @@ class ServiceProvider extends NodesServiceProvider
     }
 
     /**
+     * Register assets facade
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return void
      */
     public function registerFacade()
     {
