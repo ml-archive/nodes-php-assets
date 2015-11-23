@@ -13,6 +13,11 @@ use Nodes\Assets\Support\Facade\Assets;
 class ServiceProvider extends NodesServiceProvider
 {
     /**
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
      * Register the service provider.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
