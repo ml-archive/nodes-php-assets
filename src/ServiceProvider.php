@@ -15,7 +15,7 @@ class ServiceProvider extends NodesServiceProvider
     /**
      * @var bool
      */
-    protected $defer = true;
+//    protected $defer = true;
 
     /**
      * Register the service provider.
