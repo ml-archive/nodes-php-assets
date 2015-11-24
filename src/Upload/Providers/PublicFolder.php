@@ -1,5 +1,5 @@
 <?php
-namespace Nodes\Assets\Upload\Provider;
+namespace Nodes\Assets\Upload\Providers;
 
 use Exception;
 use Nodes\Exceptions\Exception as NodesException;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class PublicFolder
  * @author  Casper Rasmussen <cr@nodes.dk>
  *
- * @package Nodes\Assets\Upload\Provider
+ * @package Nodes\Assets\Upload\Providers
  */
 class PublicFolder extends AbstractUploadProvider
 {
