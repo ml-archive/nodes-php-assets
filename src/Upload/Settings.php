@@ -1,8 +1,7 @@
 <?php
-
 namespace Nodes\Assets\Upload;
 
-use Nodes\Assets\Upload\Exception\AssetBadRequestException;
+use Nodes\Assets\Upload\Exceptions\AssetBadRequestException;
 
 /**
  * Class Settings
@@ -13,40 +12,52 @@ use Nodes\Assets\Upload\Exception\AssetBadRequestException;
 class Settings
 {
     /**
+     * Folder name
      * @var string|null
      */
     protected $folder;
 
     /**
+     * File extension
      * @var string|null
      */
     protected $fileExtension;
 
     /**
+     * Filename
      * @var string|null
      */
     protected $fileName;
 
     /**
-     * Make sure the required data for storing
+     * Validate required data
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @throws \Nodes\Assets\Upload\Exception\AssetBadRequestException
+     *
+     * @access public
+     * @return void
+     * @throws \Nodes\Assets\Upload\Exceptions\AssetBadRequestException
      */
     public function checkRequiredData()
     {
+        // Validate filename
         if (!$this->hasFilename()) {
             throw new AssetBadRequestException('Missing filename, cannot upload with a empty filename');
         }
 
+        // Validate file extension
         if (!$this->hasFileExtension()) {
             throw new AssetBadRequestException('Missing file extension, cannot upload with a empty file extension');
         }
     }
 
     /**
+     * Check if filename is present
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @return bool
+     *
+     * @access public
+     * @return boolean
      */
     public function hasFilename()
     {
@@ -54,8 +65,12 @@ class Settings
     }
 
     /**
+     * Retrieve filename
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @return null|string
+     *
+     * @access public
+     * @return string|null
      */
     public function getFileName()
     {
@@ -63,20 +78,26 @@ class Settings
     }
 
     /**
+     * Set filename
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $fileName
+     *
+     * @access public
+     * @param  $fileName
      * @return \Nodes\Assets\Upload\Settings
      */
     public function setFileName($fileName)
     {
         $this->fileName = $fileName;
-
         return $this;
     }
 
     /**
+     * Check if file extension is present
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @return bool
+     *
+     * @access public
+     * @return boolean
      */
     public function hasFileExtension()
     {
@@ -84,7 +105,11 @@ class Settings
     }
 
     /**
+     * Retrieve file extension
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
      * @return string|null
      */
     public function getFileExtension()
@@ -93,20 +118,27 @@ class Settings
     }
 
     /**
+     * Set file extension
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $fileExtension
+     *
+     * @access public
+     * @param  $fileExtension
      * @return \Nodes\Assets\Upload\Settings
      */
     public function setFileExtension($fileExtension)
     {
         $this->fileExtension = $fileExtension;
-
         return $this;
     }
 
     /**
+     * Check if folder name is present
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @return bool
+     *
+     * @access public
+     * @return boolean
      */
     public function hasFolder()
     {
@@ -114,8 +146,12 @@ class Settings
     }
 
     /**
+     * Retrieve folder name
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @return string
+     *
+     * @access public
+     * @return string|null
      */
     public function getFolder()
     {
@@ -123,32 +159,35 @@ class Settings
     }
 
     /**
+     * Set folder name
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $folder
+     *
+     * @access public
+     * @param  string $folder
      * @return \Nodes\Assets\Upload\Settings
      */
     public function setFolder($folder)
     {
-        if (!$folder) {
-            $this->folder = config('nodes.assetsv2.general.default.folder');
-        } else {
-            $this->folder = $folder;
-        }
-
+        $this->folder = !empty($folder) ? $folder : config('nodes.assetsv2.general.default.folder');
         return $this;
     }
 
     /**
-     * return folder/filename
+     * Retrieve file path
      *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
      * @return string
      */
     public function getFilePath()
     {
+        // Generate filename with extension
         $path = $this->fileName . '.' . $this->fileExtension;
 
-        if($this->hasFolder()) {
+        // Prepend folder if present
+        if ($this->hasFolder()) {
             $path = $this->folder . DIRECTORY_SEPARATOR . $path;
         }
 

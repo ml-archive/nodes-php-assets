@@ -1,12 +1,12 @@
 <?php
-namespace Nodes\Assets\Support\Facade;
+namespace Nodes\Assets\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Nodes Asset Facade
+ * Class Assets Facade
  *
- * @package Nodes\Support\Facade
+ * @package Nodes\Support\Facades
  */
 class Assets extends Facade
 {

@@ -1,14 +1,14 @@
 <?php
-namespace Nodes\Assets\Upload\Exception;
+namespace Nodes\Assets\Upload\Exceptions;
 
-use Nodes\Exception\Exception;
+use Nodes\Exceptions\Exception as NodesException;
 
 /**
  * Class AssetsBadRequestException
  *
  * @package Nodes\Assets\Exception
  */
-class AssetsBadRequestException extends Exception
+class AssetsBadRequestException extends NodesException
 {
     /**
      * Constructor

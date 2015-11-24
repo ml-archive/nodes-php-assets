@@ -1,6 +1,12 @@
 <?php
 namespace Nodes\Assets\Url;
 
+/**
+ * Class AbstractUrlProvider
+ *
+ * @abstract
+ * @package Nodes\Assets\Url
+ */
 abstract class AbstractUrlProvider implements ProviderInterface
 {
     /**

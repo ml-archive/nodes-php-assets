@@ -1,18 +1,35 @@
 <?php
-namespace Nodes\Assets\Url\Provider;
+namespace Nodes\Assets\Url\Providers;
 
 use Nodes\Assets\Url\AbstractUrlProvider;
 
+/**
+ * Class NodesCdn
+ *
+ * @package Nodes\Assets\Url\Providers
+ */
 class NodesCdn extends AbstractUrlProvider
 {
+    /**
+     * NodesCdn constructor
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @param  array $nodesConfig
+     */
     public function __construct(array $nodesConfig)
     {
         $this->nodesConfig = $nodesConfig;
     }
 
     /**
+     * Retrieve URL from assets path
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $assetPath
+     *
+     * @access public
+     * @param  string $assetPath
      * @return string
      */
     public function getUrlFromPath($assetPath)

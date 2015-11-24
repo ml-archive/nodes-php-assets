@@ -3,7 +3,7 @@ namespace Nodes\Assets;
 
 use Illuminate\Foundation\AliasLoader;
 use Nodes\AbstractServiceProvider as NodesServiceProvider;
-use Nodes\Assets\Support\Facade\Assets;
+use Nodes\Assets\Support\Facades\Assets;
 
 /**
  * Class ServiceProvider
@@ -13,12 +13,7 @@ use Nodes\Assets\Support\Facade\Assets;
 class ServiceProvider extends NodesServiceProvider
 {
     /**
-     * @var bool
-     */
-//    protected $defer = true;
-
-    /**
-     * Register the service provider.
+     * Register the service provider
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *

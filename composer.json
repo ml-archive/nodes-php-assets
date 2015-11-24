@@ -19,15 +19,15 @@
     "require": {
         "php": ">=5.4.0",
         "nodes/core": "^0.1",
-        "league/flysystem-aws-s3-v3": "~1.0"
+        "aws/aws-sdk-php": "^2.8"
     },
     "autoload": {
         "psr-4": {
            "Nodes\\Assets\\": "src"
         },
         "files": [
-            "src/Support/Helper/Upload.php",
-            "src/Support/Helper/URL.php"
+            "src/Support/Helpers/Upload.php",
+            "src/Support/Helpers/URL.php"
         ]
     },
     "minimum-stability": "stable"

@@ -1,13 +1,22 @@
 <?php
-namespace Nodes\Assets\Url\Provider;
+namespace Nodes\Assets\Url\Providers;
 
 use Nodes\Assets\Url\AbstractUrlProvider;
 
+/**
+ * Class PublicFolder
+ *
+ * @package Nodes\Assets\Url\Providers
+ */
 class PublicFolder extends AbstractUrlProvider
 {
     /**
+     * Retrieve URL from assets path
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $assetPath
+     *
+     * @access public
+     * @param  string $assetPath
      * @return string
      */
     public function getUrlFromPath($assetPath)

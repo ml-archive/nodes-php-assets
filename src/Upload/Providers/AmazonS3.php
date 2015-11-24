@@ -1,49 +1,65 @@
 <?php
-namespace Nodes\Assets\Upload\Provider;
+namespace Nodes\Assets\Upload\Providers;
 
 use Aws\Common\Aws;
 use Nodes\Assets\Upload\AbstractUploadProvider;
-use Nodes\Assets\Upload\Exception\AssetsBadRequestException;
-use Nodes\Assets\Upload\Exception\AssetsUploadFailedException;
+use Nodes\Assets\Upload\Exceptions\AssetsBadRequestException;
+use Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException;
 use Nodes\Assets\Upload\Settings;
-use Nodes\Exception\Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class AmazonS3
- * @author  Casper Rasmussen <cr@nodes.dk>
  *
- * @package Nodes\Assets\Upload\Provider
+ * @package Nodes\Assets\Upload\Providers
  */
 class AmazonS3 extends AbstractUploadProvider
 {
     /**
+     * S3 Client instance
      * @var \Aws\S3\S3Client
      */
     protected $s3;
 
     /**
+     * Name of bucket
      * @var string
      */
     protected $bucket;
 
+    /**
+     * AmazonS3 constructor
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @param  array $s3Config
+     * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
+     */
     public function __construct(array $s3Config)
     {
+        // Validate credentials
         if (empty($s3Config) || $s3Config['key'] == 'your-key') {
             throw new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems');
         }
 
+        // Initiate S3 instance
         $this->s3 = Aws::factory($s3Config)->get('s3');
 
+        // Set S3 bucket
         $this->bucket = $s3Config['bucket'];
     }
 
     /**
+     * Upload file to S3
+     *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     * @param \Nodes\Assets\Upload\Settings                       $settings
+     *
+     * @access protected
+     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
+     * @param  \Nodes\Assets\Upload\Settings                       $settings
      * @return string
-     * @throws \Nodes\Assets\Upload\Exception\AssetsUploadFailedException
+     * @throws \Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException
      */
     protected function store(UploadedFile $uploadedFile, Settings $settings)
     {
@@ -58,7 +74,6 @@ class AmazonS3 extends AbstractUploadProvider
                 'SourceFile' => $uploadedFile->getRealPath(),
                 'ACL' => 'public-read'
             ]);
-
         } catch (\Exception $e) {
             throw new AssetsUploadFailedException('Could not upload file to Amazon S3. Reason: ' . $e->getMessage());
         }
