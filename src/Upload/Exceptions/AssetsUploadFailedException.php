@@ -11,18 +11,18 @@ use Nodes\Exceptions\Exception as NodesException;
 class AssetsUploadFailedException extends NodesException
 {
     /**
-     * Constructor
+     * AssetsUploadFailedException constructor
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
      * @access public
      * @param  string  $message
-     * @param  integer $statusCode
-     * @param  string  $statusCodeMessage
+     * @param  integer $code
+     * @param  array   $headers
      * @param  boolean $report
      */
-    public function __construct($message, $statusCode = 500, $statusCodeMessage = null, $report = false)
+    public function __construct($message, $code = 500, $headers = [], $report = false)
     {
-        parent::__construct($message, $statusCode, $statusCodeMessage, $report);
+        parent::__construct($message, $code, $headers, $report);
     }
 }

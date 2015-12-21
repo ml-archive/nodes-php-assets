@@ -40,7 +40,7 @@ class AmazonS3 extends AbstractUploadProvider
     {
         // Validate credentials
         if (empty($s3Config) || $s3Config['key'] == 'your-key') {
-            throw new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems');
+            throw (new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems'))->setStatusCode(400);
         }
 
         // Initiate S3 instance

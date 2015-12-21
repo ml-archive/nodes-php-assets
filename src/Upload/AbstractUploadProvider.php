@@ -84,7 +84,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
         // Stream file from URL
         $content = @file_get_contents($url);
         if (empty($content)) {
-            throw new AssetsBadRequestException('Could not stream content from given URL');
+            throw (new AssetsBadRequestException('Could not stream content from given URL'))->setStatusCode(400);
         }
 
         // Write streamed content to temp. file
@@ -142,7 +142,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
 
         // Try and parse data URI to our container
         if (!DataUri::tryParse($dataUri, $dataUriObject)) {
-            throw new AssetsBadRequestException('Could not stream the content');
+            throw (new AssetsBadRequestException('Could not stream the content'))->setStatusCode(400);
         }
 
         // Retrieve the data
@@ -229,6 +229,6 @@ abstract class AbstractUploadProvider implements ProviderInterface
             return $fileInfo['extension'];
         }
 
-        throw new AssetsBadRequestException('Cannot detect file extension, provide it before uploading.');
+        throw (new AssetsBadRequestException('Cannot detect file extension, provide it before uploading.'))->setStatusCode(400);
     }
 }

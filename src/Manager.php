@@ -17,12 +17,14 @@ class Manager
 {
     /**
      * Upload provider
+     * 
      * @var \Nodes\Assets\Upload\ProviderInterface
      */
     protected $uploadProvider;
 
     /**
      * URL provider
+     *
      * @var \Nodes\Assets\Url\ProviderInterface
      */
     protected $urlProvider;
@@ -88,7 +90,7 @@ class Manager
 
         // Validate data URI
         if (!is_string($dataUri) || !DataUri::isParsable($dataUri)) {
-            throw new AssetsBadRequestException('The passed data uri is not valid data:[<mediatype>][;base64],<data>');
+            throw (new AssetsBadRequestException('The passed data uri is not valid data:[<mediatype>][;base64],<data>'))->setStatusCode(400);
         }
 
         // Generate settings
@@ -122,12 +124,12 @@ class Manager
 
         // Validate URL
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new AssetsBadRequestException('The passed url is not a valid url');
+            throw (new AssetsBadRequestException('The passed url is not a valid url'))->setStatusCode(400);
         }
 
         // Generate settings
         if (!$settings) {
-            $settings = new UploadSettings();
+            $settings = new UploadSettings;
         }
 
         // Upload and return path
@@ -163,7 +165,7 @@ class Manager
         } else if ($file instanceof UploadedFile) {
             return $this->addFromUploadedFile($file, $folder, $settings);
         } else {
-            throw new AssetsBadRequestException('Uploaded file/string type is not supported');
+            throw (new AssetsBadRequestException('Uploaded file/string type is not supported'))->setStatusCode(400);
         }
     }
 
