@@ -16,7 +16,6 @@ class ServiceProvider extends NodesServiceProvider
      * Register the service provider
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @return void
      */
@@ -32,7 +31,6 @@ class ServiceProvider extends NodesServiceProvider
      * Setup container binding
      *
      * @author Casper Rasmussen <moru@nodes.dk>
-     *
      * @access protected
      * @return void
      */
@@ -47,7 +45,6 @@ class ServiceProvider extends NodesServiceProvider
      * Register assets manager
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @return void
      */
@@ -66,7 +63,6 @@ class ServiceProvider extends NodesServiceProvider
      * Register assets facade
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @return void
      */

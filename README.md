@@ -10,7 +10,7 @@ Nodes\Assets\ServiceProvider::class
 #Copy the config file
 
 ```php
-from assets/config to htdocs/config/assetsv2
+from assets/config to htdocs/config/assets
 ```
 
 #Pick providers
@@ -18,7 +18,7 @@ There is both a upload and url provider
 This can be found in general config
 
 ```php
-config/assetsv2/general
+config/assets/general
 ```
 
 

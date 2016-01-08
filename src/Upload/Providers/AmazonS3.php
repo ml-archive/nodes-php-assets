@@ -1,7 +1,6 @@
 <?php
 namespace Nodes\Assets\Upload\Providers;
 
-use Aws\Common\Aws;
 use Nodes\Assets\Upload\AbstractUploadProvider;
 use Nodes\Assets\Upload\Exceptions\AssetsBadRequestException;
 use Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException;
@@ -17,6 +16,7 @@ class AmazonS3 extends AbstractUploadProvider
 {
     /**
      * Name of bucket
+     *
      * @var string
      */
     protected $bucket;
@@ -25,7 +25,6 @@ class AmazonS3 extends AbstractUploadProvider
      * AmazonS3 constructor
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @param  array $s3Config
      * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
@@ -45,7 +44,6 @@ class AmazonS3 extends AbstractUploadProvider
      * Upload file to S3
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access protected
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
@@ -57,7 +55,6 @@ class AmazonS3 extends AbstractUploadProvider
         try {
             // Upload to bucket
             \Storage::disk('s3')->put($settings->getFilePath(), file_get_contents($uploadedFile->getRealPath()));
-
         } catch (\Exception $e) {
             throw new AssetsUploadFailedException('Could not upload file to Amazon S3. Reason: ' . $e->getMessage());
         }
