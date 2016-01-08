@@ -29,5 +29,5 @@
       "src/Support/Helpers/Upload.php",
       "src/Support/Helpers/URL.php"
     ]
-  },
+  }
 }
