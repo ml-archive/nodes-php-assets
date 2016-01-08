@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "laravel/framework": "5.1.*||5.2.*",
         "nodes/core": "^0.1",
         "aws/aws-sdk-php": "^2.8"
     },
@@ -29,6 +29,5 @@
             "src/Support/Helpers/Upload.php",
             "src/Support/Helpers/URL.php"
         ]
-    },
-    "minimum-stability": "stable"
+    }
 }
