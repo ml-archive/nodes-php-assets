@@ -50,11 +50,9 @@ class ServiceProvider extends NodesServiceProvider
      */
     public function registerManager()
     {
-        $this->app->bindShared('nodes.assets', function ($app) {
-
+        $this->app->singleton('nodes.assets', function ($app) {
             $uploadProvider = call_user_func(config('nodes.assets.general.upload.provider'), $app);
             $urlProvider = call_user_func(config('nodes.assets.general.url.provider'), $app);
-
             return new Manager($uploadProvider, $urlProvider);
         });
     }
