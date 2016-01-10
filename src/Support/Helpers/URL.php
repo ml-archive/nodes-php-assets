@@ -43,7 +43,7 @@ if (!function_exists('assets_resize')) {
 
         // Add h query param
         if($height && is_numeric($height) && $height > 0) {
-            $query['w'] = (int) $height;
+            $query['h'] = (int) $height;
         }
 
         // Check if query is empty
