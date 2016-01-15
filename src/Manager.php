@@ -160,7 +160,7 @@ class Manager
         // we should use to process this file
         if (filter_var($file, FILTER_VALIDATE_URL)) {
             return $this->addFromUrl($file, $folder, $settings);
-        } elseif (is_string($file) && DataUri::isParsable($file)) {
+        } else if (is_string($file) && DataUri::isParsable($file)) {
             return $this->addFromDataUri($file, $folder, $settings);
         } else if ($file instanceof UploadedFile) {
             return $this->addFromUploadedFile($file, $folder, $settings);
