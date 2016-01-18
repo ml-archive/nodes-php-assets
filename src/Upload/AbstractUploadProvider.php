@@ -83,6 +83,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
     {
         // Stream file from URL
         $content = @file_get_contents($url);
+
         if (empty($content)) {
             throw (new AssetsBadRequestException('Could not stream content from given URL'))->setStatusCode(400);
         }
@@ -93,6 +94,10 @@ abstract class AbstractUploadProvider implements ProviderInterface
 
         // File's mime-type
         $mimeType = (new finfo(FILEINFO_MIME))->file($file);
+
+        if (!in_array(explode(';', $mimeType)[0], config('nodes.assets.providers.nodes.imageExtensionMimeTypes'))) {
+            throw (new AssetsBadRequestException('Invalid stream mime type'))->setStatusCode(400);
+        }
 
         // Parse URL
         $pathInfo = pathinfo($url);
