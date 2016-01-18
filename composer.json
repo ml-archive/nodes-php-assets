@@ -2,32 +2,32 @@
   "name": "nodes/assets",
   "description": "Package to make upload and generation of urls matching the files",
   "keywords": [
-    "nodes",
-    "assets",
-    "files",
-    "cdn",
-    "s3",
-    "laravel"
+      "nodes",
+      "assets",
+      "files",
+      "cdn",
+      "s3",
+      "laravel"
   ],
   "authors": [
-    {
-      "name": "Casper Rasmussen",
-      "email": "cr@nodes.dk",
-      "role": "CTO"
-    }
+      {
+          "name": "Casper Rasmussen",
+          "email": "cr@nodes.dk",
+          "role": "CTO"
+      }
   ],
   "require": {
-    "laravel/framework": "5.1.*||5.2.*",
-    "nodes/core": "^0.1",
-    "league/flysystem-aws-s3-v3": "~1.0"
+      "laravel/framework": "5.1.*||5.2.*",
+      "nodes/core": "^0.1",
+      "league/flysystem-aws-s3-v3": "~1.0"
   },
   "autoload": {
-    "psr-4": {
-      "Nodes\\Assets\\": "src"
-    },
-    "files": [
-      "src/Support/Helpers/Upload.php",
-      "src/Support/Helpers/URL.php"
-    ]
+      "psr-4": {
+          "Nodes\\Assets\\": "src/"
+      },
+      "files": [
+          "src/Support/Helpers/Upload.php",
+          "src/Support/Helpers/URL.php"
+      ]
   }
 }
