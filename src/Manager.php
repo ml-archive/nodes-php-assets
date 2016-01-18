@@ -160,9 +160,9 @@ class Manager
         // we should use to process this file
         if (filter_var($file, FILTER_VALIDATE_URL)) {
             return $this->addFromUrl($file, $folder, $settings);
-        } else if (is_string($file) && DataUri::isParsable($file)) {
+        } elseif (is_string($file) && DataUri::isParsable($file)) {
             return $this->addFromDataUri($file, $folder, $settings);
-        } else if ($file instanceof UploadedFile) {
+        } elseif ($file instanceof UploadedFile) {
             return $this->addFromUploadedFile($file, $folder, $settings);
         } else {
             throw (new AssetsBadRequestException('Uploaded file/string type is not supported'))->setStatusCode(400);
