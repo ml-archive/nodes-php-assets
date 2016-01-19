@@ -4,7 +4,7 @@ namespace Nodes\Assets\Upload\Providers;
 use Exception;
 use Nodes\Exceptions\Exception as NodesException;
 use Nodes\Assets\Upload\AbstractUploadProvider;
-use Nodes\Assets\Upload\Exceptions\AssetUploadFailedException;
+use Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException;
 use Nodes\Assets\Upload\Settings;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -25,13 +25,13 @@ class PublicFolder extends AbstractUploadProvider
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
      * @return string
-     * @throws \Nodes\Assets\Upload\Exceptions\AssetUploadFailedException
+     * @throws \Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException
      */
     protected function store(UploadedFile $uploadedFile, Settings $settings)
     {
         try {
             // Retrieve folder path
-            $path = public_path(config('nodes.assetsv2.provider.publicFolder.uploads')) . DIRECTORY_SEPARATOR . $settings->getFolder();
+            $path = public_path(config('nodes.assets.providers.publicFolder.subFolder')) . DIRECTORY_SEPARATOR . $settings->getFolder();
 
             // If folder doesn't exists,
             // we'll create it with global permissions
@@ -43,12 +43,13 @@ class PublicFolder extends AbstractUploadProvider
             $content = file_get_contents($uploadedFile->getRealPath());
 
             // Save uploaded file to folder
-            $result = file_put_contents($path . DIRECTORY_SEPARATOR . $settings->getFileName(), $content);
+            $result = file_put_contents($path . DIRECTORY_SEPARATOR . $settings->getFileName() . '.' . $settings->getFileExtension(), $content);
+
             if (!$result) {
-                throw new NodesException('Failed to save');
+                throw new NodesException('Failed to save', 500);
             }
         } catch (Exception $e) {
-            throw new AssetUploadFailedException('Could not save the file to public folder. Reason: ' . $e->getMessage());
+            throw new AssetsUploadFailedException('Could not save the file to public folder. Reason: ' . $e->getMessage());
         }
 
         return $settings->getFilePath();
