@@ -21,7 +21,7 @@ class PublicFolder extends AbstractUrlProvider
      */
     public function getUrlFromPath($assetPath)
     {
-        // Ensure platfor independency
+        // Ensure platform independency
         $path = str_replace('\\', '/', $assetPath);
 
         // Generated URL for asset file
