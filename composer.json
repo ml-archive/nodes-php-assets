@@ -1,6 +1,6 @@
 {
   "name": "nodes/assets",
-  "description": "Package to make upload and generation of urls matching the files",
+  "description": "Makes it easier to manage and upload files to your assets provider.",
   "keywords": [
       "nodes",
       "assets",
