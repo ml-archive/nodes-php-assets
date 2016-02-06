@@ -162,7 +162,7 @@ class Manager
             return $this->addFromUrl($file, $folder, $settings);
         } elseif (is_string($file) && DataUri::isParsable($file)) {
             return $this->addFromDataUri($file, $folder, $settings);
-        } else if ($file instanceof UploadedFile) {
+        } elseif ($file instanceof UploadedFile) {
             return $this->addFromUploadedFile($file, $folder, $settings);
         } else {
             throw (new AssetsBadRequestException('Uploaded file/string type is not supported'))->setStatusCode(400);

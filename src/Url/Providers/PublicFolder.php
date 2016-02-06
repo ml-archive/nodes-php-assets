@@ -21,7 +21,10 @@ class PublicFolder extends AbstractUrlProvider
      */
     public function getUrlFromPath($assetPath)
     {
+        // Ensure platform independency
+        $path = str_replace('\\', '/', $assetPath);
+
         // Generated URL for asset file
-        return ($this->getUrlProtocol() . config('nodes.assetsv2.provider.publicFolder.domain') . '/' . config('nodes.assetsv2.provider.publicFolder.uploads') . '/' . $assetPath);
+        return ($this->getUrlProtocol() . config('nodes.assets.providers.publicFolder.domain') . '/' . config('nodes.assets.providers.publicFolder.subFolder') . '/' . $path);
     }
 }

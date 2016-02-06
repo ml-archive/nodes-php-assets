@@ -1,7 +1,7 @@
 <?php
 namespace Nodes\Assets\Upload;
 
-use Nodes\Assets\Upload\Exceptions\AssetBadRequestException;
+use Nodes\Assets\Upload\Exceptions\AssetsBadRequestException;
 
 /**
  * Class Settings
@@ -36,18 +36,18 @@ class Settings
      *
      * @access public
      * @return void
-     * @throws \Nodes\Assets\Upload\Exceptions\AssetBadRequestException
+     * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
      */
     public function checkRequiredData()
     {
         // Validate filename
         if (!$this->hasFilename()) {
-            throw new AssetBadRequestException('Missing filename, cannot upload with a empty filename');
+            throw new AssetsBadRequestException('Missing filename, cannot upload with a empty filename');
         }
 
         // Validate file extension
         if (!$this->hasFileExtension()) {
-            throw new AssetBadRequestException('Missing file extension, cannot upload with a empty file extension');
+            throw new AssetsBadRequestException('Missing file extension, cannot upload with a empty file extension');
         }
     }
 

@@ -82,7 +82,15 @@ abstract class AbstractUploadProvider implements ProviderInterface
     public function addFromUrl($url, $folder, Settings $settings)
     {
         // Stream file from URL
-        $content = @file_get_contents($url);
+        $streamContextOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ]
+        ];
+
+        $content = @file_get_contents($url, false, stream_context_create($streamContextOptions));
+
         if (empty($content)) {
             throw (new AssetsBadRequestException('Could not stream content from given URL'))->setStatusCode(400);
         }
@@ -154,6 +162,10 @@ abstract class AbstractUploadProvider implements ProviderInterface
 
         // File's mime-type
         $mimeType = (new finfo(FILEINFO_MIME))->file($file);
+
+        if (!in_array(explode(';', $mimeType)[0], config('nodes.assets.providers.nodes.imageExtensionMimeTypes'))) {
+            throw (new AssetsBadRequestException('Invalid stream mime type'))->setStatusCode(400);
+        }
 
         // Generate an UploadedFile object
         $uploadedFile = new UploadedFile($file, Str::random(10) . '.' . $dataUriObject->getFileExtension(), $mimeType, filesize($file));
