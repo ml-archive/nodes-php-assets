@@ -40,7 +40,7 @@ class PublicFolder extends AbstractUploadProvider
             }
 
             // Stream uploaded file
-            $content = file_get_contents($uploadedFile->getRealPath());
+            $content = file_get_contents($uploadedFile->getPathname());
 
             // Save uploaded file to folder
             $result = file_put_contents($path . DIRECTORY_SEPARATOR . $settings->getFileName() . '.' . $settings->getFileExtension(), $content);
