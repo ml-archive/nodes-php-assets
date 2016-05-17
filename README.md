@@ -11,10 +11,10 @@ A easy integration for handling files to [Laravel](http://laravel.com/docs).
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/assets.svg?style=social&label=Watch)](https://github.com/nodes-php/assets/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/assets.svg?style=social&label=Fork)](https://github.com/nodes-php/assets/network)
 
-## Introduction
+## 📝 Introduction
 One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is a fast easy file storage integration system. The Storage facade made it easier, but we still need the option to upload from differente formats and store to a very specific folder structure, retrieve a path and be able to create urls to serve api and sites
 
-## Installation
+## 📦 Installation
 
 To install this package you will need:
 
@@ -35,6 +35,8 @@ Or you can run the composer require command from your terminal.
 composer require nodes/assets
 ```
 
+## 🔧 Setup
+
 Setup service provider in config/app.php
 
 ```
@@ -49,7 +51,7 @@ Nodes\Assets\ServiceProvider::class
 
 Copy the config files from vendor/nodes/assets/config to config/nodes/assets
 
-## Usage
+## ⚙ Usage
 
 ###Global functions
 
@@ -99,15 +101,13 @@ public function addFromDataUri($dataUri, $folder = null, UploadSettings $setting
 public function get($path)
 ```
 
-## Developers / Maintainers
+## 🏆 Credits
 
-This package is developed and maintained by the PHP team at [Nodes Agency](http://nodesagency.com)
+This package is developed and maintained by the PHP team at [Nodes](http://nodesagency.com)
 
 [![Follow Nodes PHP on Twitter](https://img.shields.io/twitter/follow/nodesphp.svg?style=social)](https://twitter.com/nodesphp) [![Tweet Nodes PHP](https://img.shields.io/twitter/url/http/nodesphp.svg?style=social)](https://twitter.com/nodesphp)
 
-### License
+## 📄 License
 
 This package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
-
 
