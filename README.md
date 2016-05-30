@@ -52,7 +52,17 @@ Setup alias in config/app.php
 'Assets' => Nodes\Assets\Support\Facades\Assets::class
 ```
 
-Copy the config files from vendor/nodes/assets/config to config/nodes/assets
+Publish config files
+
+```
+php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider"
+```
+
+If you want to overwrite any existing config files use the `--force` parameter
+
+```
+php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider" --force
+```
 
 ## ⚙ Usage
 
