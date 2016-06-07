@@ -1,6 +1,6 @@
 ## Assets
 
-A easy integration for handling files to [Laravel](http://laravel.com/docs).
+A easy integration for handling files with [Laravel](http://laravel.com/docs).
 
 [![Total downloads](https://img.shields.io/packagist/dt/nodes/assets.svg)](https://packagist.org/packages/nodes/assets)
 [![Monthly downloads](https://img.shields.io/packagist/dm/nodes/assets.svg)](https://packagist.org/packages/nodes/assets)
@@ -12,7 +12,10 @@ A easy integration for handling files to [Laravel](http://laravel.com/docs).
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/assets.svg?style=social&label=Fork)](https://github.com/nodes-php/assets/network)
 
 ## 📝 Introduction
-One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is a fast easy file storage integration system. The Storage facade made it easier, but we still need the option to upload from differente formats and store to a very specific folder structure, retrieve a path and be able to create urls to serve api and sites
+
+One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is a fast easy file storage integration system.
+
+The `Storage` facade made it easier, but we still need the option to upload from differente formats and store to a very specific folder structure, retrieve a path and be able to create urls to serve api and sites.
 
 ## 📦 Installation
 
@@ -32,28 +35,38 @@ You must then modify your `composer.json` file and run `composer update` to incl
 Or you can run the composer require command from your terminal.
 
 ```
-composer require nodes/assets
+composer require nodes/assets:^1.0
 ```
 
 ## 🔧 Setup
 
-Setup service provider in config/app.php
-
-```
-'NodesAssets' => Nodes\Assets\Support\Facades\Assets::class
-```
-
-Setup alias in config/app.php
+Setup service provider in `config/app.php`
 
 ```
 Nodes\Assets\ServiceProvider::class
 ```
 
-Copy the config files from vendor/nodes/assets/config to config/nodes/assets
+Setup alias in `config/app.php`
+
+```
+'Assets' => Nodes\Assets\Support\Facades\Assets::class
+```
+
+Publish config files
+
+```
+php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider"
+```
+
+If you want to overwrite any existing config files use the `--force` parameter
+
+```
+php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider" --force
+```
 
 ## ⚙ Usage
 
-###Global functions
+### Global methods
 
 ```php
 function assets_add($file, $folder = null, UploadSettings $settings = null)
@@ -75,30 +88,26 @@ function assets_add_data_uri($dataUri, $folder = null, UploadSettings $settings 
 function assets_get($path, UrlSettings $settings = null)
 ```
 
-###Facade
+### Facade methods
 
 ```php
-\NodesAssets::
+Assets::add($file, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-public function add($file, $folder = null, UploadSettings $settings = null)
+Assets::aaddFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-public function addFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null)
+Assets::aaddFromUrl($url, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-public function addFromUrl($url, $folder = null, UploadSettings $settings = null)
+Assets::aaddFromDataUri($dataUri, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-public function addFromDataUri($dataUri, $folder = null, UploadSettings $settings = null)
-```
-
-```php
-public function get($path)
+Assets::aget($path)
 ```
 
 ## 🏆 Credits

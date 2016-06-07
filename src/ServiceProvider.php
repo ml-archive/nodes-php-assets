@@ -1,17 +1,30 @@
 <?php
 namespace Nodes\Assets;
 
-use Illuminate\Foundation\AliasLoader;
-use Nodes\AbstractServiceProvider as NodesServiceProvider;
-use Nodes\Assets\Support\Facades\Assets;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 /**
  * Class ServiceProvider
  *
  * @package Nodes\Assets
  */
-class ServiceProvider extends NodesServiceProvider
+class ServiceProvider extends IlluminateServiceProvider
 {
+    /**
+     * Boot the service provider
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @return void
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        $this->publishGroups();
+    }
+
     /**
      * Register the service provider
      *
@@ -21,10 +34,26 @@ class ServiceProvider extends NodesServiceProvider
      */
     public function register()
     {
-        parent::register();
         $this->registerManager();
         $this->setupBindings();
-        $this->registerFacade();
+    }
+
+    /**
+     * Register publish groups
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access protected
+     * @return void
+     */
+    protected function publishGroups()
+    {
+        // Config files
+        $this->publishes([
+            __DIR__ . '/../config/providers/nodes.php' => config_path('nodes/assets/providers/nodes.php'),
+            __DIR__ . '/../config/providers/publicFolder.php' => config_path('nodes/assets/providers/publicFolder.php'),
+            __DIR__ . '/../config/general.php' => config_path('nodes/assets/general.php')
+        ], 'config');
     }
 
     /**
@@ -54,21 +83,6 @@ class ServiceProvider extends NodesServiceProvider
             $uploadProvider = call_user_func(config('nodes.assets.general.upload.provider'), $app);
             $urlProvider = call_user_func(config('nodes.assets.general.url.provider'), $app);
             return new Manager($uploadProvider, $urlProvider);
-        });
-    }
-
-    /**
-     * Register assets facade
-     *
-     * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
-     * @return void
-     */
-    public function registerFacade()
-    {
-        $this->app->booting(function () {
-            $loader = AliasLoader::getInstance();
-            $loader->alias('Assets', Assets::class);
         });
     }
 }
