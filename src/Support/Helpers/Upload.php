@@ -12,7 +12,7 @@ if (!function_exists('assets_add')) {
      */
     function assets_add($file, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
     {
-        return \Assets::add($file, $folder, $settings);
+        return app('nodes.assets')->add($file, $folder, $settings);
     }
 }
 
@@ -29,7 +29,7 @@ if (!function_exists('assets_add_uploaded_file')) {
      */
     function assets_add_uploaded_file(\Symfony\Component\HttpFoundation\File\UploadedFile $file, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
     {
-        return \Assets::addFromUploadedFile($file, $folder, $settings);
+        return app('nodes.assets')->addFromUploadedFile($file, $folder, $settings);
     }
 }
 
@@ -46,7 +46,7 @@ if (!function_exists('assets_add_url')) {
      */
     function assets_add_url($url, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
     {
-        return \Assets::addFromUrl($url, $folder, $settings);
+        return app('nodes.assets')->addFromUrl($url, $folder, $settings);
     }
 }
 
@@ -63,6 +63,6 @@ if (!function_exists('assets_add_data_uri')) {
      */
     function assets_add_data_uri($dataUri, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
     {
-        return \Assets::addFromDataUri($dataUri, $folder, $settings);
+        return app('nodes.assets')->addFromDataUri($dataUri, $folder, $settings);
     }
 }

@@ -11,7 +11,7 @@ A easy integration for handling files with [Laravel](http://laravel.com/docs).
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/assets.svg?style=social&label=Watch)](https://github.com/nodes-php/assets/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/assets.svg?style=social&label=Fork)](https://github.com/nodes-php/assets/network)
 
-## Introduction
+## 📝 Introduction
 
 One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is a fast easy file storage integration system.
 
@@ -40,13 +40,13 @@ composer require nodes/assets:^1.0
 
 ## 🔧 Setup
 
-Setup service provider in config/app.php
+Setup service provider in `config/app.php`
 
 ```
 Nodes\Assets\ServiceProvider::class
 ```
 
-Setup alias in config/app.php
+Setup alias in `config/app.php`
 
 ```
 'Assets' => Nodes\Assets\Support\Facades\Assets::class
@@ -66,7 +66,7 @@ php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider" --force
 
 ## ⚙ Usage
 
-### Global functions
+### Global methods
 
 ```php
 function assets_add($file, $folder = null, UploadSettings $settings = null)

@@ -20,6 +20,8 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
         $this->publishGroups();
     }
 
@@ -32,8 +34,6 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        parent::register();
-
         $this->registerManager();
         $this->setupBindings();
     }
