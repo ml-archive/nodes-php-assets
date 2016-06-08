@@ -26,7 +26,7 @@ To install this package you will need:
 
 You must then modify your `composer.json` file and run `composer update` to include the latest version of the package in your project.
 
-```
+```json
 "require": {
     "nodes/assets": "^1.0"
 }
@@ -34,7 +34,7 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 Or you can run the composer require command from your terminal.
 
-```
+```bash
 composer require nodes/assets:^1.0
 ```
 
@@ -42,25 +42,25 @@ composer require nodes/assets:^1.0
 
 Setup service provider in `config/app.php`
 
-```
+```php
 Nodes\Assets\ServiceProvider::class
 ```
 
 Setup alias in `config/app.php`
 
-```
+```php
 'Assets' => Nodes\Assets\Support\Facades\Assets::class
 ```
 
 Publish config files
 
-```
+```bash
 php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider"
 ```
 
 If you want to overwrite any existing config files use the `--force` parameter
 
-```
+```bash
 php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider" --force
 ```
 
@@ -95,19 +95,19 @@ Assets::add($file, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-Assets::aaddFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null)
+Assets::addFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-Assets::aaddFromUrl($url, $folder = null, UploadSettings $settings = null)
+Assets::addFromUrl($url, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-Assets::aaddFromDataUri($dataUri, $folder = null, UploadSettings $settings = null)
+Assets::addFromDataUri($dataUri, $folder = null, UploadSettings $settings = null)
 ```
 
 ```php
-Assets::aget($path)
+Assets::get($path)
 ```
 
 ## 🏆 Credits
