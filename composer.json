@@ -9,6 +9,7 @@
       "s3",
       "laravel"
   ],
+  "license": "MIT",
   "authors": [
       {
           "name": "Casper Rasmussen",
