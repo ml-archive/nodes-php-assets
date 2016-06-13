@@ -10,7 +10,7 @@ if (!function_exists('assets_get')) {
      */
     function assets_get($path)
     {
-        return \Assets::get($path);
+        return app('nodes.assets')->get($path);
     }
 }
 
