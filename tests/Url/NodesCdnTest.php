@@ -22,5 +22,6 @@ class RolesRepositoryTest extends Orchestra\Testbench\TestCase
     public function testBasicExample()
     {
         $this->assertTrue(true);
+        $this->assertTrue(true);
     }
 }
