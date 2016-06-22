@@ -10,6 +10,8 @@ A easy integration for handling files with [Laravel](http://laravel.com/docs).
 [![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/assets.svg?style=social&label=Star)](https://github.com/nodes-php/assets/stargazers)
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/assets.svg?style=social&label=Watch)](https://github.com/nodes-php/assets/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/assets.svg?style=social&label=Fork)](https://github.com/nodes-php/assets/network)
+[![Travis tests](https://img.shields.io/travis/nodes-php/assets.svg)](https://travis-ci.org/nodes-php/assets)
+
 
 ## 📝 Introduction
 
