@@ -163,10 +163,6 @@ abstract class AbstractUploadProvider implements ProviderInterface
         // File's mime-type
         $mimeType = (new finfo(FILEINFO_MIME))->file($file);
 
-        if (!in_array(explode(';', $mimeType)[0], config('nodes.assets.providers.nodes.imageExtensionMimeTypes'))) {
-            throw (new AssetsBadRequestException('Invalid stream mime type'))->setStatusCode(400);
-        }
-
         // Generate an UploadedFile object
         $uploadedFile = new UploadedFile($file, Str::random(10) . '.' . $dataUriObject->getFileExtension(), $mimeType, filesize($file));
 

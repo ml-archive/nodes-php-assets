@@ -16,23 +16,31 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         ];
     }
 
-//    public function testJpg()
-//    {
-//        $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.jpg');
-//        $this->assertTrue(filter_var($url, FILTER_VALIDATE_URL));
-//    }
+    public function testData()
+    {
+        $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.pdf');
+        $this->assertTrue((bool) filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertTrue(strpos($url, 'data') !== false);
+    }
 
-//    public function testWithUndefinedExtension()
-//    {
-//        $this->expectException(Exception::class);
-//        $this->generateNodesCdn()->getUrlFromPath('folder/file');
-//    }
-//
-//    public function testInitProviderWithOutCloudFrontUrl()
-//    {
-//        $this->expectException(Exception::class);
-//        new NodesCdn([]);
-//    }
+    public function testJpg()
+    {
+        $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.jpg');
+        $this->assertTrue((bool) filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertTrue(strpos($url, 'image') !== false);
+    }
+
+    public function testWithUndefinedExtension()
+    {
+        $this->expectException(Exception::class);
+        $this->generateNodesCdn()->getUrlFromPath('folder/file');
+    }
+
+    public function testInitProviderWithOutCloudFrontUrl()
+    {
+        $this->expectException(Exception::class);
+        new NodesCdn([]);
+    }
 
     public function testInitProviderWithMissingTrailingSlashOnCloudFrontUrl()
     {
@@ -94,7 +102,6 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
                 'svg'   => 'image/svg+xml',
                 'svgz'  => 'image/svg+xml',
                 'tiff'  => 'image/tiff',
-                'pdf'   => 'application/pdf',
             ],
         ]);
     }

@@ -33,7 +33,10 @@ return [
         'gif'   => 'image/gif',
         'svg'   => 'image/svg+xml',
         'svgz'  => 'image/svg+xml',
-        'tiff'  => 'image/tiff',
-        'pdf'   => 'application/pdf',
+        'tiff'  => 'image/tiff'
     ],
+
+    'supportedMimeTypes' => [
+
+    ]
 ];
