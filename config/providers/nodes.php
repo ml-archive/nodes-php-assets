@@ -12,7 +12,7 @@ return [
     | Without protocol and with trailing slash.
     |
     */
-    'cloudfront_url' => env('AMAZON_CLOUDFRONT_URL'),
+    'cloudfrontUrl'          => env('AMAZON_CLOUDFRONT_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,14 +25,18 @@ return [
     |
     */
     'imageExtensionMimeTypes' => [
-        'jpg' => 'image/jpeg',
-        'jpeg' => 'image/jpeg',
-        'pjpg' => 'image/pjpeg',
+        'jpg'   => 'image/jpeg',
+        'jpeg'  => 'image/jpeg',
+        'pjpg'  => 'image/pjpeg',
         'pjpeg' => 'image/pjpeg',
-        'png' => 'image/png',
-        'gif' => 'image/gif',
-        'svg' => 'image/svg+xml',
-        'svgz' => 'image/svg+xml',
-        'tiff' => 'image/tiff'
+        'png'   => 'image/png',
+        'gif'   => 'image/gif',
+        'svg'   => 'image/svg+xml',
+        'svgz'  => 'image/svg+xml',
+        'tiff'  => 'image/tiff'
+    ],
+
+    'supportedMimeTypes' => [
+
     ]
 ];

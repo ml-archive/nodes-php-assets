@@ -2,6 +2,7 @@
 namespace Nodes\Assets\Url\Providers;
 
 use Nodes\Assets\Url\AbstractUrlProvider;
+use Nodes\Exceptions\Exception;
 
 /**
  * Class NodesCdn
@@ -11,31 +12,64 @@ use Nodes\Assets\Url\AbstractUrlProvider;
 class NodesCdn extends AbstractUrlProvider
 {
     /**
+     * Config array
+     *
+     * @var array
+     */
+    protected $nodesConfig;
+
+    /**
      * NodesCdn constructor
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
-     * @param  array $nodesConfig
+     * @param array $nodesConfig
+     * @throws Exception
      */
     public function __construct(array $nodesConfig)
     {
         $this->nodesConfig = $nodesConfig;
+
+        // For backwards compatibility
+        if (isset($this->nodesConfig['cloudfront_url'])) {
+            $this->nodesConfig['cloudfrontUrl'] = $this->nodesConfig['cloudfront_url'];
+        }
+
+        // Check cloudfrontUrl
+        if (empty($this->nodesConfig['cloudfrontUrl'])) {
+            throw new Exception('cloudfrontUrl is missing in config', 500);
+        }
+
+        // Check cloudfrontUrl has trailing /
+        if (!$this->endswith($this->nodesConfig['cloudfrontUrl'], '/')) {
+            throw new Exception('cloudfrontUrl is missing trailing /', 500);
+        }
+
+        // Check that imageExtensionMimeTypes is correct
+        if (!isset($this->nodesConfig['imageExtensionMimeTypes']) ||
+            !is_array($this->nodesConfig['imageExtensionMimeTypes'])
+        ) {
+            throw new Exception('imageExtensionMimeTypes is missing in config or not an array', 500);
+        }
     }
 
     /**
      * Retrieve URL from assets path
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @param  string $assetPath
+     * @throws Exception
      * @return string
      */
     public function getUrlFromPath($assetPath)
     {
         // Parse file path
         $filePath = pathinfo($assetPath);
+
+        if (empty($filePath['extension'])) {
+            throw new Exception(sprintf('Missing extension of file [%s]', $assetPath), 500);
+        }
 
         // Determine internal file type ("images" or "data")
         $fileType = array_key_exists(strtolower($filePath['extension']), $this->nodesConfig['imageExtensionMimeTypes']) ? 'images' : 'data';
@@ -52,6 +86,18 @@ class NodesCdn extends AbstractUrlProvider
         }
 
         // Generated URL for asset file
-        return $this->getUrlProtocol() . $this->nodesConfig['cloudfront_url'] . $folderPath . $folder . '/' . $filePath['basename'];
+        return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrl'] . $folderPath . $folder . '/' .
+               $filePath['basename'];
+    }
+
+    private function endswith($string, $test)
+    {
+        $strlen = strlen($string);
+        $testlen = strlen($test);
+        if ($testlen > $strlen) {
+            return false;
+        }
+
+        return substr_compare($string, $test, $strlen - $testlen, $testlen) === 0;
     }
 }
