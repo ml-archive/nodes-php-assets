@@ -18,6 +18,7 @@
 >
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+        <env name="APP_NAME" value="test-app"/>
     </php>
     <testsuites>
         <testsuite name="API Test Suite">

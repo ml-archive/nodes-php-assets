@@ -4,8 +4,10 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Nodes\Assets\ServiceProvider;
+use Nodes\Assets\Url\Providers\NodesCdn;
+use Nodes\Exceptions\Exception;
 
-class RolesRepositoryTest extends Orchestra\Testbench\TestCase
+class NodesCdnTest extends Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
     {
@@ -14,14 +16,86 @@ class RolesRepositoryTest extends Orchestra\Testbench\TestCase
         ];
     }
 
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
+//    public function testJpg()
+//    {
+//        $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.jpg');
+//        $this->assertTrue(filter_var($url, FILTER_VALIDATE_URL));
+//    }
+
+//    public function testWithUndefinedExtension()
+//    {
+//        $this->expectException(Exception::class);
+//        $this->generateNodesCdn()->getUrlFromPath('folder/file');
+//    }
+//
+//    public function testInitProviderWithOutCloudFrontUrl()
+//    {
+//        $this->expectException(Exception::class);
+//        new NodesCdn([]);
+//    }
+
+    public function testInitProviderWithMissingTrailingSlashOnCloudFrontUrl()
     {
-        $this->assertTrue(true);
-        $this->assertTrue(true);
+        $this->expectException(Exception::class);
+         new NodesCdn([
+            'cloudfrontUrl'           => 'test',
+            'imageExtensionMimeTypes' => [],
+        ]);
+    }
+
+    public function testInitProviderWithOutImageExtensionMimeTypes()
+    {
+        $this->expectException(Exception::class);
+        new NodesCdn([
+            'cloudfrontUrl' => 'test/',
+        ]);
+    }
+
+    public function testInitProviderWithNoneArrayImageExtensionMimeTypes()
+    {
+        $this->expectException(Exception::class);
+        new NodesCdn([
+            'cloudfrontUrl'           => 'test/',
+            'imageExtensionMimeTypes' => 'test',
+        ]);
+    }
+
+    public function testInitProviderNew()
+    {
+        $nodesCdn = new NodesCdn([
+            'cloudfrontUrl'           => 'test/',
+            'imageExtensionMimeTypes' => [],
+        ]);
+
+        $this->assertInstanceOf(NodesCdn::class, $nodesCdn);
+    }
+
+    public function testInitProviderOld()
+    {
+        $nodesCdn = new NodesCdn([
+            'cloudfront_url'          => 'test/',
+            'imageExtensionMimeTypes' => [],
+        ]);
+
+        $this->assertInstanceOf(NodesCdn::class, $nodesCdn);
+    }
+
+    private function generateNodesCdn()
+    {
+        return new NodesCdn([
+            'cloudfrontUrl'           => 'test/',
+            'imageExtensionMimeTypes' => [
+                'jpg'   => 'image/jpeg',
+                'jpeg'  => 'image/jpeg',
+                'pjpg'  => 'image/pjpeg',
+                'pjpeg' => 'image/pjpeg',
+                'png'   => 'image/png',
+                'gif'   => 'image/gif',
+                'svg'   => 'image/svg+xml',
+                'svgz'  => 'image/svg+xml',
+                'tiff'  => 'image/tiff',
+                'pdf'   => 'application/pdf',
+            ],
+        ]);
     }
 }
