@@ -6,13 +6,26 @@ return [
     | CDN Base URL
     |--------------------------------------------------------------------------
     |
-    | The base URL of our Amazon CDN. This will be prefixed with on files
+    | The base URL of our Amazon CDN. This will be prefixed with on image
     | that'll be retrieved from via Nodes Assets.
     |
     | Without protocol and with trailing slash.
     |
     */
-    'cloudfrontUrl'          => env('AMAZON_CLOUDFRONT_URL'),
+    'cloudfrontUrl'           => env('AMAZON_CLOUDFRONT_URL'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | CDN Base URL for data
+    |--------------------------------------------------------------------------
+    |
+    | The base URL of our Amazon CDN. This will be prefixed with on data files
+    | that'll be retrieved from via Nodes Assets.
+    |
+    | Without protocol and with trailing slash.
+    |
+    */
+    'cloudfrontUrlData'       => env('AMAZON_CLOUDFRONT_URL_DATA'),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,10 +46,6 @@ return [
         'gif'   => 'image/gif',
         'svg'   => 'image/svg+xml',
         'svgz'  => 'image/svg+xml',
-        'tiff'  => 'image/tiff'
+        'tiff'  => 'image/tiff',
     ],
-
-    'supportedMimeTypes' => [
-
-    ]
 ];
