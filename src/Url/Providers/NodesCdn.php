@@ -84,17 +84,16 @@ class NodesCdn extends AbstractUrlProvider
 
         // If file type is an image, we'll have to support
         if ($fileType == 'images') {
-            $folderPath = 'image' . DIRECTORY_SEPARATOR . env('APP_NAME') . DIRECTORY_SEPARATOR;
-            $cdnUrl = $this->nodesConfig['cloudfrontUrl'];
+            // Generated URL for asset file
+            return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrl'] . 'image' . DIRECTORY_SEPARATOR .
+                   env('APP_NAME') . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
+                   $filePath['basename'];
         } else {
             // Download and data folder path
-            $folderPath = $fileType . DIRECTORY_SEPARATOR . env('APP_NAME') . DIRECTORY_SEPARATOR;
-            $cdnUrl = $this->nodesConfig['cloudfrontUrlData'];
+            return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrlData'] . env('APP_NAME') .
+                   DIRECTORY_SEPARATOR . $fileType . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
+                   $filePath['basename'];
         }
-
-        // Generated URL for asset file
-        return $this->getUrlProtocol() . $cdnUrl . $folderPath . $folder . '/' .
-               $filePath['basename'];
     }
 
     /**
