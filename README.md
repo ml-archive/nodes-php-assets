@@ -30,14 +30,14 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 ```json
 "require": {
-    "nodes/assets": "^1.0"
+    "nodes/assets": "^1.1"
 }
 ```
 
 Or you can run the composer require command from your terminal.
 
 ```bash
-composer require nodes/assets:^1.0
+composer require nodes/assets:^1.1
 ```
 
 ## 🔧 Setup
