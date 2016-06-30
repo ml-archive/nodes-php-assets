@@ -30,11 +30,6 @@ class NodesCdn extends AbstractUrlProvider
     {
         $this->nodesConfig = $nodesConfig;
 
-        // For backwards compatibility
-        if (isset($this->nodesConfig['cloudfront_url'])) {
-            $this->nodesConfig['cloudfrontUrl'] = $this->nodesConfig['cloudfront_url'];
-        }
-
         // Check cloudfrontUrl
         if (empty($this->nodesConfig['cloudfrontUrl'])) {
             throw new Exception('cloudfrontUrl is missing in config', 500);
@@ -43,6 +38,16 @@ class NodesCdn extends AbstractUrlProvider
         // Check cloudfrontUrl has trailing /
         if (!$this->endswith($this->nodesConfig['cloudfrontUrl'], '/')) {
             throw new Exception('cloudfrontUrl is missing trailing /', 500);
+        }
+
+        // Check cloudfrontUrlData
+        if (empty($this->nodesConfig['cloudfrontUrlData'])) {
+            throw new Exception('cloudfrontUrlData is missing in config', 500);
+        }
+
+        // Check cloudfrontUrlData has trailing /
+        if (!$this->endswith($this->nodesConfig['cloudfrontUrlData'], '/')) {
+            throw new Exception('cloudfrontUrlData is missing trailing /', 500);
         }
 
         // Check that imageExtensionMimeTypes is correct
@@ -79,17 +84,27 @@ class NodesCdn extends AbstractUrlProvider
 
         // If file type is an image, we'll have to support
         if ($fileType == 'images') {
-            $folderPath = 'image' . DIRECTORY_SEPARATOR . env('APP_NAME') . DIRECTORY_SEPARATOR;
+            // Generated URL for asset file
+            return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrl'] . 'image' . DIRECTORY_SEPARATOR .
+                   env('APP_NAME') . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
+                   $filePath['basename'];
         } else {
             // Download and data folder path
-            $folderPath = $fileType . DIRECTORY_SEPARATOR . env('APP_NAME') . DIRECTORY_SEPARATOR;
+            return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrlData'] . env('APP_NAME') .
+                   DIRECTORY_SEPARATOR . $fileType . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
+                   $filePath['basename'];
         }
-
-        // Generated URL for asset file
-        return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrl'] . $folderPath . $folder . '/' .
-               $filePath['basename'];
     }
 
+    /**
+     * endswith
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access private
+     * @param $string
+     * @param $test
+     * @return bool
+     */
     private function endswith($string, $test)
     {
         $strlen = strlen($string);

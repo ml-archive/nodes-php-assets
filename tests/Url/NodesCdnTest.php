@@ -39,13 +39,16 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
     public function testInitProviderWithOutCloudFrontUrl()
     {
         $this->expectException(Exception::class);
-        new NodesCdn([]);
+        new NodesCdn([
+            'cloudfrontUrlData' => 'test/',
+            'imageExtensionMimeTypes' => [],
+        ]);
     }
 
     public function testInitProviderWithMissingTrailingSlashOnCloudFrontUrl()
     {
         $this->expectException(Exception::class);
-         new NodesCdn([
+        new NodesCdn([
             'cloudfrontUrl'           => 'test',
             'imageExtensionMimeTypes' => [],
         ]);
@@ -64,6 +67,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrl'           => 'test/',
+            'cloudfrontUrlData'       => 'test/',
             'imageExtensionMimeTypes' => 'test',
         ]);
     }
@@ -72,26 +76,27 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
     {
         $nodesCdn = new NodesCdn([
             'cloudfrontUrl'           => 'test/',
+            'cloudfrontUrlData'       => 'test/',
             'imageExtensionMimeTypes' => [],
         ]);
 
         $this->assertInstanceOf(NodesCdn::class, $nodesCdn);
     }
 
-    public function testInitProviderOld()
+    public function testInitProviderWithoutCloudFrontUrlData()
     {
-        $nodesCdn = new NodesCdn([
-            'cloudfront_url'          => 'test/',
+        $this->expectException(Exception::class);
+        new NodesCdn([
+            'cloudfrontUrl'           => 'test/',
             'imageExtensionMimeTypes' => [],
         ]);
-
-        $this->assertInstanceOf(NodesCdn::class, $nodesCdn);
     }
 
     private function generateNodesCdn()
     {
         return new NodesCdn([
             'cloudfrontUrl'           => 'test/',
+            'cloudfrontUrlData'       => 'test/',
             'imageExtensionMimeTypes' => [
                 'jpg'   => 'image/jpeg',
                 'jpeg'  => 'image/jpeg',
