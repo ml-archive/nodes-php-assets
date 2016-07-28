@@ -2,10 +2,10 @@
 namespace Nodes\Assets\Upload\Providers;
 
 use Exception;
-use Nodes\Exceptions\Exception as NodesException;
 use Nodes\Assets\Upload\AbstractUploadProvider;
 use Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException;
 use Nodes\Assets\Upload\Settings;
+use Nodes\Exceptions\Exception as NodesException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
