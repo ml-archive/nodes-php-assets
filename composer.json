@@ -1,50 +1,50 @@
 {
-    "name": "nodes/assets",
-    "description": "Package to make upload and generation of urls matching the files",
-    "keywords": [
-        "nodes",
-        "assets",
-        "files",
-        "cdn",
-        "s3",
-        "laravel"
-    ],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Casper Rasmussen",
-            "email": "cr@nodes.dk",
-            "role": "CTO"
-        },
-        {
-            "name": "Rasmus Ebbesen",
-            "email": "re@nodes.dk",
-            "role": "Developer"
-        },
-        {
-            "name": "Morten Rugaard",
-            "email": "moru@nodes.dk",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "illuminate/support" : "5.2.*",
-        "illuminate/container" : "5.2.*",
-        "symfony/http-foundation": "2.8.*|3.0.*",
-        "nodes/core": "^1.0",
-        "league/flysystem-aws-s3-v3": "~1.0"
+  "name": "nodes/assets",
+  "description": "Package to make upload and generation of urls matching the files",
+  "keywords": [
+    "nodes",
+    "assets",
+    "files",
+    "cdn",
+    "s3",
+    "laravel"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Casper Rasmussen",
+      "email": "cr@nodes.dk",
+      "role": "CTO"
     },
-    "require-dev" : {
-        "phpunit/phpunit": "^5.4",
-        "orchestra/testbench": "~3.0"
+    {
+      "name": "Rasmus Ebbesen",
+      "email": "re@nodes.dk",
+      "role": "Developer"
     },
-    "autoload": {
-        "psr-4": {
-            "Nodes\\Assets\\": "src/"
-        },
-        "files": [
-            "src/Support/Helpers/Upload.php",
-            "src/Support/Helpers/URL.php"
-        ]
+    {
+      "name": "Morten Rugaard",
+      "email": "moru@nodes.dk",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "illuminate/support": "5.2.*",
+    "illuminate/container": "5.2.*",
+    "symfony/http-foundation": "2.8.*|3.0.*",
+    "nodes/core": "^1.0",
+    "league/flysystem-aws-s3-v3": "~1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.4",
+    "orchestra/testbench": "~3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nodes\\Assets\\": "src/"
+    },
+    "files": [
+      "src/Support/Helpers/Upload.php",
+      "src/Support/Helpers/URL.php"
+    ]
+  }
 }

@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class AmazonS3 extends AbstractUploadProvider
 {
+
     /**
      * Name of bucket
      *
@@ -21,32 +22,38 @@ class AmazonS3 extends AbstractUploadProvider
      */
     protected $bucket;
 
+
     /**
      * AmazonS3 constructor
      *
      * @author Morten Rugaard <moru@nodes.dk>
      * @access public
+     *
      * @param  array $s3Config
+     *
      * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
      */
     public function __construct(array $s3Config)
     {
         // Validate credentials
-        if (empty($s3Config) || $s3Config['key'] == 'your-key') {
-            throw (new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems'))->setStatusCode(400);
+        if (empty( $s3Config ) || $s3Config['key'] == 'your-key') {
+            throw ( new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems') )->setStatusCode(400);
         }
 
         // Set S3 bucket
         $this->bucket = $s3Config['bucket'];
     }
 
+
     /**
      * Upload file to S3
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access protected
+     *
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
+     *
      * @return string
      * @throws \Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException
      */

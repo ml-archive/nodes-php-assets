@@ -1,5 +1,5 @@
 <?php
-if (!function_exists('assets_add')) {
+if ( ! function_exists('assets_add')) {
     /**
      * Upload asset by auto-detection
      *
@@ -8,6 +8,7 @@ if (!function_exists('assets_add')) {
      * @param  mixed                              $file
      * @param  string|null                        $folder
      * @param  \Nodes\Assets\Upload\Settings|null $settings
+     *
      * @return string $path
      */
     function assets_add($file, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
@@ -16,7 +17,7 @@ if (!function_exists('assets_add')) {
     }
 }
 
-if (!function_exists('assets_add_uploaded_file')) {
+if ( ! function_exists('assets_add_uploaded_file')) {
     /**
      * Upload asset by uploaded file
      *
@@ -25,15 +26,19 @@ if (!function_exists('assets_add_uploaded_file')) {
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @param  string|null                                         $folder
      * @param  \Nodes\Assets\Upload\Settings|null                  $settings
+     *
      * @return string $path
      */
-    function assets_add_uploaded_file(\Symfony\Component\HttpFoundation\File\UploadedFile $file, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
-    {
+    function assets_add_uploaded_file(
+        \Symfony\Component\HttpFoundation\File\UploadedFile $file,
+        $folder = null,
+        \Nodes\Assets\Upload\Settings $settings = null
+    ) {
         return app('nodes.assets')->addFromUploadedFile($file, $folder, $settings);
     }
 }
 
-if (!function_exists('assets_add_url')) {
+if ( ! function_exists('assets_add_url')) {
     /**
      * Upload asset from an URL
      *
@@ -42,6 +47,7 @@ if (!function_exists('assets_add_url')) {
      * @param  string                             $url
      * @param  string|null                        $folder
      * @param  \Nodes\Assets\Upload\Settings|null $settings
+     *
      * @return string $path
      */
     function assets_add_url($url, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)
@@ -50,7 +56,7 @@ if (!function_exists('assets_add_url')) {
     }
 }
 
-if (!function_exists('assets_add_data_uri')) {
+if ( ! function_exists('assets_add_data_uri')) {
     /**
      * Upload asset by Data URI
      *
@@ -59,6 +65,7 @@ if (!function_exists('assets_add_data_uri')) {
      * @param  string                             $dataUri
      * @param  string|null                        $folder
      * @param  \Nodes\Assets\Upload\Settings|null $settings
+     *
      * @return string $path
      */
     function assets_add_data_uri($dataUri, $folder = null, \Nodes\Assets\Upload\Settings $settings = null)

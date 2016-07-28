@@ -10,20 +10,22 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class PublicFolder
- * @author  Casper Rasmussen <cr@nodes.dk>
  *
+ * @author  Casper Rasmussen <cr@nodes.dk>
  * @package Nodes\Assets\Upload\Providers
  */
 class PublicFolder extends AbstractUploadProvider
 {
+
     /**
      * Save file to folder
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access protected
+     *
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
+     *
      * @return string
      * @throws \Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException
      */
@@ -35,7 +37,7 @@ class PublicFolder extends AbstractUploadProvider
 
             // If folder doesn't exists,
             // we'll create it with global permissions
-            if (!file_exists($path)) {
+            if ( ! file_exists($path)) {
                 mkdir($path, 0777, true);
             }
 
@@ -43,9 +45,10 @@ class PublicFolder extends AbstractUploadProvider
             $content = file_get_contents($uploadedFile->getPathname());
 
             // Save uploaded file to folder
-            $result = file_put_contents($path . DIRECTORY_SEPARATOR . $settings->getFileName() . '.' . $settings->getFileExtension(), $content);
+            $result = file_put_contents($path . DIRECTORY_SEPARATOR . $settings->getFileName() . '.' . $settings->getFileExtension(),
+                $content);
 
-            if (!$result) {
+            if ( ! $result) {
                 throw new NodesException('Failed to save', 500);
             }
         } catch (Exception $e) {

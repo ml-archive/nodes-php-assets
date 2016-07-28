@@ -10,11 +10,11 @@ use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
  */
 class ServiceProvider extends IlluminateServiceProvider
 {
+
     /**
      * Boot the service provider
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return void
      */
@@ -24,6 +24,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
         $this->publishGroups();
     }
+
 
     /**
      * Register the service provider
@@ -38,11 +39,11 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->setupBindings();
     }
 
+
     /**
      * Register publish groups
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access protected
      * @return void
      */
@@ -50,11 +51,12 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         // Config files
         $this->publishes([
-            __DIR__ . '/../config/providers/nodes.php' => config_path('nodes/assets/providers/nodes.php'),
+            __DIR__ . '/../config/providers/nodes.php'        => config_path('nodes/assets/providers/nodes.php'),
             __DIR__ . '/../config/providers/publicFolder.php' => config_path('nodes/assets/providers/publicFolder.php'),
-            __DIR__ . '/../config/general.php' => config_path('nodes/assets/general.php')
+            __DIR__ . '/../config/general.php'                => config_path('nodes/assets/general.php'),
         ], 'config');
     }
+
 
     /**
      * Setup container binding
@@ -65,10 +67,11 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     protected function setupBindings()
     {
-        $this->app->bind('Nodes\Assets\Manager', function ($app) {
+        $this->app->bind('Nodes\Assets\Manager', function($app) {
             return $app['nodes.assets'];
         });
     }
+
 
     /**
      * Register assets manager
@@ -79,9 +82,10 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function registerManager()
     {
-        $this->app->singleton('nodes.assets', function ($app) {
+        $this->app->singleton('nodes.assets', function($app) {
             $uploadProvider = call_user_func(config('nodes.assets.general.upload.provider'), $app);
-            $urlProvider = call_user_func(config('nodes.assets.general.url.provider'), $app);
+            $urlProvider    = call_user_func(config('nodes.assets.general.url.provider'), $app);
+
             return new Manager($uploadProvider, $urlProvider);
         });
     }
