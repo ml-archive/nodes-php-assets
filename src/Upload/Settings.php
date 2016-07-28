@@ -109,7 +109,7 @@ class Settings
      */
     public function hasFileExtension()
     {
-        return ! empty($this->fileExtension);
+        return ! empty( $this->fileExtension );
     }
 
 
@@ -182,7 +182,7 @@ class Settings
      */
     public function setFolder($folder)
     {
-        $this->folder = ! empty($folder) ? $folder : config('nodes.assetsv2.general.default.folder');
+        $this->folder = ! empty( $folder ) ? $folder : config('nodes.assetsv2.general.default.folder');
 
         return $this;
     }
@@ -198,11 +198,11 @@ class Settings
     public function getFilePath()
     {
         // Generate filename with extension
-        $path = $this->fileName.'.'.$this->fileExtension;
+        $path = $this->fileName . '.' . $this->fileExtension;
 
         // Prepend folder if present
         if ($this->hasFolder()) {
-            $path = $this->folder.DIRECTORY_SEPARATOR.$path;
+            $path = $this->folder . DIRECTORY_SEPARATOR . $path;
         }
 
         return $path;

@@ -51,9 +51,9 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         // Config files
         $this->publishes([
-            __DIR__.'/../config/providers/nodes.php'        => config_path('nodes/assets/providers/nodes.php'),
-            __DIR__.'/../config/providers/publicFolder.php' => config_path('nodes/assets/providers/publicFolder.php'),
-            __DIR__.'/../config/general.php'                => config_path('nodes/assets/general.php'),
+            __DIR__ . '/../config/providers/nodes.php'        => config_path('nodes/assets/providers/nodes.php'),
+            __DIR__ . '/../config/providers/publicFolder.php' => config_path('nodes/assets/providers/publicFolder.php'),
+            __DIR__ . '/../config/general.php'                => config_path('nodes/assets/general.php'),
         ], 'config');
     }
 

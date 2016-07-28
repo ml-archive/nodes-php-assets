@@ -33,7 +33,7 @@ class PublicFolder extends AbstractUploadProvider
     {
         try {
             // Retrieve folder path
-            $path = public_path(config('nodes.assets.providers.publicFolder.subFolder')).DIRECTORY_SEPARATOR.$settings->getFolder();
+            $path = public_path(config('nodes.assets.providers.publicFolder.subFolder')) . DIRECTORY_SEPARATOR . $settings->getFolder();
 
             // If folder doesn't exists,
             // we'll create it with global permissions
@@ -45,14 +45,14 @@ class PublicFolder extends AbstractUploadProvider
             $content = file_get_contents($uploadedFile->getPathname());
 
             // Save uploaded file to folder
-            $result = file_put_contents($path.DIRECTORY_SEPARATOR.$settings->getFileName().'.'.$settings->getFileExtension(),
+            $result = file_put_contents($path . DIRECTORY_SEPARATOR . $settings->getFileName() . '.' . $settings->getFileExtension(),
                 $content);
 
             if ( ! $result) {
                 throw new NodesException('Failed to save', 500);
             }
         } catch (Exception $e) {
-            throw new AssetsUploadFailedException('Could not save the file to public folder. Reason: '.$e->getMessage());
+            throw new AssetsUploadFailedException('Could not save the file to public folder. Reason: ' . $e->getMessage());
         }
 
         return $settings->getFilePath();

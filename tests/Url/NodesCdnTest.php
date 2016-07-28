@@ -18,7 +18,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
     public function testData()
     {
         $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.pdf');
-        $this->assertTrue((bool)filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertTrue((bool) filter_var($url, FILTER_VALIDATE_URL));
         $this->assertTrue(strpos($url, 'data') !== false);
     }
 
@@ -26,7 +26,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
     public function testJpg()
     {
         $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.jpg');
-        $this->assertTrue((bool)filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertTrue((bool) filter_var($url, FILTER_VALIDATE_URL));
         $this->assertTrue(strpos($url, 'image') !== false);
     }
 
@@ -43,7 +43,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrlData'       => 'test/',
-            'imageExtensionMimeTypes' => [],
+            'imageExtensionMimeTypes' => [ ],
         ]);
     }
 
@@ -53,7 +53,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrl'           => 'test',
-            'imageExtensionMimeTypes' => [],
+            'imageExtensionMimeTypes' => [ ],
         ]);
     }
 
@@ -83,7 +83,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $nodesCdn = new NodesCdn([
             'cloudfrontUrl'           => 'test/',
             'cloudfrontUrlData'       => 'test/',
-            'imageExtensionMimeTypes' => [],
+            'imageExtensionMimeTypes' => [ ],
         ]);
 
         $this->assertInstanceOf(NodesCdn::class, $nodesCdn);
@@ -95,7 +95,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrl'           => 'test/',
-            'imageExtensionMimeTypes' => [],
+            'imageExtensionMimeTypes' => [ ],
         ]);
     }
 

@@ -89,7 +89,7 @@ class DataUri
      */
     public function getMediaType()
     {
-        return empty($this->mediaType) === false ? $this->mediaType : DataUri::DEFAULT_TYPE;
+        return empty( $this->mediaType ) === false ? $this->mediaType : DataUri::DEFAULT_TYPE;
     }
 
 
@@ -103,7 +103,7 @@ class DataUri
 
         $fileType = @explode(';', explode('/', $mediaType)[1])[0];
 
-        if (empty($fileType) || $fileType == 'plain') {
+        if (empty( $fileType ) || $fileType == 'plain') {
             return DataUri::DEFAULT_TYPE;
         }
 
@@ -161,7 +161,7 @@ class DataUri
      */
     public function setEncodedData($encoding, $data)
     {
-        if (($encoding !== DataUri::ENCODING_URL_ENCODED_OCTETS) && ($encoding !== DataUri::ENCODING_BASE64)) {
+        if (( $encoding !== DataUri::ENCODING_URL_ENCODED_OCTETS ) && ( $encoding !== DataUri::ENCODING_BASE64 )) {
             throw new \InvalidArgumentException('Unsupported encoding scheme');
         }
 
@@ -242,15 +242,15 @@ class DataUri
     {
         $output = 'data:';
 
-        if (($this->getMediaType() !== DataUri::DEFAULT_TYPE) || ($this->getEncoding() !== DataUri::ENCODING_URL_ENCODED_OCTETS)) {
+        if (( $this->getMediaType() !== DataUri::DEFAULT_TYPE ) || ( $this->getEncoding() !== DataUri::ENCODING_URL_ENCODED_OCTETS )) {
             $output .= $this->getMediaType();
 
             if ($this->getEncoding() === DataUri::ENCODING_BASE64) {
-                $output .= ';'.DataUri::BASE64_KEYWORD;
+                $output .= ';' . DataUri::BASE64_KEYWORD;
             }
         }
 
-        $output .= ','.$this->getEncodedData();
+        $output .= ',' . $this->getEncodedData();
 
         return $output;
     }
@@ -273,7 +273,7 @@ class DataUri
      */
     public static function isParsable($dataUriString)
     {
-        return (preg_match(DataUri::$REGEX_URI, $dataUriString) === 1);
+        return ( preg_match(DataUri::$REGEX_URI, $dataUriString) === 1 );
     }
 
 
@@ -293,12 +293,12 @@ class DataUri
             $matches = null;
             if (preg_match_all(DataUri::$REGEX_URI, $dataUriString, $matches, PREG_SET_ORDER) !== false) {
 
-                $mediatype = isset($matches[0][1]) ? $matches[0][1] : DataUri::DEFAULT_TYPE;
+                $mediatype = isset( $matches[0][1] ) ? $matches[0][1] : DataUri::DEFAULT_TYPE;
 
-                $matchedEncoding = isset($matches[0][2]) ? $matches[0][2] : '';
-                $encoding        = (strtolower($matchedEncoding) === DataUri::BASE64_KEYWORD) ? DataUri::ENCODING_BASE64 : DataUri::ENCODING_URL_ENCODED_OCTETS;
+                $matchedEncoding = isset( $matches[0][2] ) ? $matches[0][2] : '';
+                $encoding        = ( strtolower($matchedEncoding) === DataUri::BASE64_KEYWORD ) ? DataUri::ENCODING_BASE64 : DataUri::ENCODING_URL_ENCODED_OCTETS;
 
-                $data = isset($matches[0][3]) ? $matches[0][3] : '';
+                $data = isset( $matches[0][3] ) ? $matches[0][3] : '';
 
                 $dataUri = new DataUri();
                 $dataUri->setMediaType($mediatype);

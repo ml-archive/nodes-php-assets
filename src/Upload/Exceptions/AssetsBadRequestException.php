@@ -22,7 +22,7 @@ class AssetsBadRequestException extends NodesException
      * @param  array   $headers
      * @param  boolean $report
      */
-    public function __construct($message, $code = 400, $headers = [], $report = false)
+    public function __construct($message, $code = 400, $headers = [ ], $report = false)
     {
         parent::__construct($message, $code, $headers, $report);
     }
