@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Nodes\Assets\ServiceProvider;
 use Nodes\Assets\Url\Providers\NodesCdn;
 use Nodes\Exceptions\Exception;
@@ -40,7 +37,7 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
     {
         $this->expectException(Exception::class);
         new NodesCdn([
-            'cloudfrontUrlData' => 'test/',
+            'cloudfrontUrlData'       => 'test/',
             'imageExtensionMimeTypes' => [],
         ]);
     }
