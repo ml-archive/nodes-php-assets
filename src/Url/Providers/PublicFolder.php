@@ -8,25 +8,24 @@ use Nodes\Assets\Url\AbstractUrlProvider;
  *
  * @package Nodes\Assets\Url\Providers
  */
-class PublicFolder extends AbstractUrlProvider
-{
+class PublicFolder extends AbstractUrlProvider {
 
-    /**
-     * Retrieve URL from assets path
-     *
-     * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
-     *
-     * @param  string $assetPath
-     *
-     * @return string
-     */
-    public function getUrlFromPath($assetPath)
-    {
-        // Ensure platform independency
-        $path = str_replace('\\', '/', $assetPath);
+	/**
+	 * Retrieve URL from assets path
+	 *
+	 * @author Casper Rasmussen <cr@nodes.dk>
+	 * @access public
+	 *
+	 * @param  string $assetPath
+	 *
+	 * @return string
+	 */
+	public function getUrlFromPath($assetPath)
+	{
+		// Ensure platform independency
+		$path = str_replace('\\', '/', $assetPath);
 
-        // Generated URL for asset file
-        return ( $this->getUrlProtocol() . config('nodes.assets.providers.publicFolder.domain') . '/' . config('nodes.assets.providers.publicFolder.subFolder') . '/' . $path );
-    }
+		// Generated URL for asset file
+		return ($this->getUrlProtocol() . config('nodes.assets.providers.publicFolder.domain') . '/' . config('nodes.assets.providers.publicFolder.subFolder') . '/' . $path);
+	}
 }
