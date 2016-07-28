@@ -6,14 +6,12 @@ use Nodes\Exceptions\Exception;
 
 class NodesCdnTest extends Orchestra\Testbench\TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [
             ServiceProvider::class,
         ];
     }
-
 
     public function testData()
     {
@@ -22,7 +20,6 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $this->assertTrue(strpos($url, 'data') !== false);
     }
 
-
     public function testJpg()
     {
         $url = $this->generateNodesCdn()->getUrlFromPath('folder/file.jpg');
@@ -30,33 +27,29 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         $this->assertTrue(strpos($url, 'image') !== false);
     }
 
-
     public function testWithUndefinedExtension()
     {
         $this->expectException(Exception::class);
         $this->generateNodesCdn()->getUrlFromPath('folder/file');
     }
 
-
     public function testInitProviderWithOutCloudFrontUrl()
     {
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrlData'       => 'test/',
-            'imageExtensionMimeTypes' => [ ],
+            'imageExtensionMimeTypes' => [],
         ]);
     }
-
 
     public function testInitProviderWithMissingTrailingSlashOnCloudFrontUrl()
     {
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrl'           => 'test',
-            'imageExtensionMimeTypes' => [ ],
+            'imageExtensionMimeTypes' => [],
         ]);
     }
-
 
     public function testInitProviderWithOutImageExtensionMimeTypes()
     {
@@ -65,7 +58,6 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
             'cloudfrontUrl' => 'test/',
         ]);
     }
-
 
     public function testInitProviderWithNoneArrayImageExtensionMimeTypes()
     {
@@ -77,28 +69,25 @@ class NodesCdnTest extends Orchestra\Testbench\TestCase
         ]);
     }
 
-
     public function testInitProviderNew()
     {
         $nodesCdn = new NodesCdn([
             'cloudfrontUrl'           => 'test/',
             'cloudfrontUrlData'       => 'test/',
-            'imageExtensionMimeTypes' => [ ],
+            'imageExtensionMimeTypes' => [],
         ]);
 
         $this->assertInstanceOf(NodesCdn::class, $nodesCdn);
     }
-
 
     public function testInitProviderWithoutCloudFrontUrlData()
     {
         $this->expectException(Exception::class);
         new NodesCdn([
             'cloudfrontUrl'           => 'test/',
-            'imageExtensionMimeTypes' => [ ],
+            'imageExtensionMimeTypes' => [],
         ]);
     }
-
 
     private function generateNodesCdn()
     {
