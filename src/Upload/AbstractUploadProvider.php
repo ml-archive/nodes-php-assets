@@ -1,4 +1,5 @@
 <?php
+
 namespace Nodes\Assets\Upload;
 
 use finfo;
@@ -8,19 +9,15 @@ use Nodes\Assets\Upload\Exceptions\AssetsBadRequestException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class AbstractUploadProvider
- *
- * @package Nodes\Assets\Upload
+ * Class AbstractUploadProvider.
  */
 abstract class AbstractUploadProvider implements ProviderInterface
 {
-
     /**
-     * Process file
+     * Process file.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @abstract
-     * @access protected
      *
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
@@ -28,14 +25,12 @@ abstract class AbstractUploadProvider implements ProviderInterface
      * @return string $path
      * @throws \Nodes\Assets\Upload\Exceptions\AssetsUploadFailedException
      */
-    protected abstract function store(UploadedFile $uploadedFile, Settings $settings);
-
+    abstract protected function store(UploadedFile $uploadedFile, Settings $settings);
 
     /**
-     * Save/Upload an uploaded file
+     * Save/Upload an uploaded file.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      *
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  string                                              $folder
@@ -48,17 +43,17 @@ abstract class AbstractUploadProvider implements ProviderInterface
     public function addFromUpload(UploadedFile $uploadedFile, $folder, Settings $settings)
     {
         // Set folder
-        if ( ! $settings->hasFolder()) {
+        if (! $settings->hasFolder()) {
             $settings->setFolder($folder);
         }
 
         // Generate filename
-        if ( ! $settings->hasFilename()) {
+        if (! $settings->hasFilename()) {
             $settings->setFileName($this->generateFilename($uploadedFile));
         }
 
         // Generate file extension
-        if ( ! $settings->hasFileExtension()) {
+        if (! $settings->hasFileExtension()) {
             $settings->setFileExtension($this->generateFileExtension($uploadedFile));
         }
 
@@ -69,12 +64,10 @@ abstract class AbstractUploadProvider implements ProviderInterface
         return $this->store($uploadedFile, $settings);
     }
 
-
     /**
-     * addFromUrl
+     * addFromUrl.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      *
      * @param string                        $url
      * @param string                        $folder
@@ -95,7 +88,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
 
         $content = @file_get_contents($url, false, stream_context_create($streamContextOptions));
 
-        if (empty( $content )) {
+        if (empty($content)) {
             throw ( new AssetsBadRequestException('Could not stream content from given URL') )->setStatusCode(400);
         }
 
@@ -113,17 +106,17 @@ abstract class AbstractUploadProvider implements ProviderInterface
         $uploadedFile = new UploadedFile($file, $pathInfo['basename'], $mimeType, filesize($file));
 
         // Set folder
-        if ( ! $settings->hasFolder()) {
+        if (! $settings->hasFolder()) {
             $settings->setFolder($folder);
         }
 
         // Generate filename
-        if ( ! $settings->hasFilename()) {
+        if (! $settings->hasFilename()) {
             $settings->setFileName($this->generateFilename($uploadedFile));
         }
 
         // Generate file extension
-        if ( ! $settings->hasFileExtension()) {
+        if (! $settings->hasFileExtension()) {
             $settings->setFileExtension($this->generateFileExtension($uploadedFile));
         }
 
@@ -134,12 +127,10 @@ abstract class AbstractUploadProvider implements ProviderInterface
         return $this->store($uploadedFile, $settings);
     }
 
-
     /**
-     * addFromDataUri
+     * addFromDataUri.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      *
      * @param string                        $dataUri
      * @param string                        $folder
@@ -154,7 +145,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
         $dataUriObject = null;
 
         // Try and parse data URI to our container
-        if ( ! DataUri::tryParse($dataUri, $dataUriObject)) {
+        if (! DataUri::tryParse($dataUri, $dataUriObject)) {
             throw ( new AssetsBadRequestException('Could not stream the content') )->setStatusCode(400);
         }
 
@@ -169,21 +160,21 @@ abstract class AbstractUploadProvider implements ProviderInterface
         $mimeType = ( new finfo(FILEINFO_MIME) )->file($file);
 
         // Generate an UploadedFile object
-        $uploadedFile = new UploadedFile($file, Str::random(10) . '.' . $dataUriObject->getFileExtension(), $mimeType,
+        $uploadedFile = new UploadedFile($file, Str::random(10).'.'.$dataUriObject->getFileExtension(), $mimeType,
             filesize($file));
 
         // Set folder
-        if ( ! $settings->hasFolder()) {
+        if (! $settings->hasFolder()) {
             $settings->setFolder($folder);
         }
 
         // Generate filename
-        if ( ! $settings->hasFilename()) {
+        if (! $settings->hasFilename()) {
             $settings->setFileName($this->generateFilename($uploadedFile));
         }
 
         // Generate file extension
-        if ( ! $settings->hasFileExtension()) {
+        if (! $settings->hasFileExtension()) {
             $settings->setFileExtension($this->generateFileExtension($uploadedFile));
         }
 
@@ -194,12 +185,10 @@ abstract class AbstractUploadProvider implements ProviderInterface
         return $this->store($uploadedFile, $settings);
     }
 
-
     /**
-     * generateFilename
+     * generateFilename.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      *
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      *
@@ -217,17 +206,15 @@ abstract class AbstractUploadProvider implements ProviderInterface
         $filename = preg_replace('/[^a-z0-9_-]/ui', '', $filePath['filename']);
 
         // Append random sting and extension to filename
-        $filename .= '_' . Str::random(10);
+        $filename .= '_'.Str::random(10);
 
         return $filename;
     }
 
-
     /**
-     * Generate file extension
+     * Generate file extension.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      *
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      *
@@ -243,7 +230,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
         $fileInfo = pathinfo($filePath);
 
         // Return extension is available
-        if ( ! empty( $fileInfo['extension'] )) {
+        if (! empty($fileInfo['extension'])) {
             return $fileInfo['extension'];
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
      |--------------------------------------------------------------------------
@@ -9,8 +10,8 @@ return [
      |
      */
     'upload' => [
-        'provider' => function() {
-            $s3Config    = config('filesystems.disks.s3');
+        'provider' => function () {
+            $s3Config = config('filesystems.disks.s3');
             $nodesConfig = config('nodes.assets.providers.nodes');
 
             return new \Nodes\Assets\Upload\Providers\NodesS3($s3Config, $nodesConfig);
@@ -25,7 +26,7 @@ return [
      |
      */
     'url'    => [
-        'provider' => function() {
+        'provider' => function () {
             $nodesConfig = config('nodes.assets.providers.nodes');
 
             return new \Nodes\Assets\Url\Providers\NodesCdn($nodesConfig);

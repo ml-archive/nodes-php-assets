@@ -1,7 +1,8 @@
 <?php
-if ( ! function_exists('assets_add')) {
+
+if (! function_exists('assets_add')) {
     /**
-     * Upload asset by auto-detection
+     * Upload asset by auto-detection.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -17,9 +18,9 @@ if ( ! function_exists('assets_add')) {
     }
 }
 
-if ( ! function_exists('assets_add_uploaded_file')) {
+if (! function_exists('assets_add_uploaded_file')) {
     /**
-     * Upload asset by uploaded file
+     * Upload asset by uploaded file.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -38,9 +39,9 @@ if ( ! function_exists('assets_add_uploaded_file')) {
     }
 }
 
-if ( ! function_exists('assets_add_url')) {
+if (! function_exists('assets_add_url')) {
     /**
-     * Upload asset from an URL
+     * Upload asset from an URL.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -56,9 +57,9 @@ if ( ! function_exists('assets_add_url')) {
     }
 }
 
-if ( ! function_exists('assets_add_data_uri')) {
+if (! function_exists('assets_add_data_uri')) {
     /**
-     * Upload asset by Data URI
+     * Upload asset by Data URI.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
