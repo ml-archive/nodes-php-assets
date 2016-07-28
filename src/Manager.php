@@ -1,4 +1,5 @@
 <?php
+
 namespace Nodes\Assets;
 
 use Nodes\Assets\Support\DataUri;
@@ -9,32 +10,29 @@ use Nodes\Assets\Url\ProviderInterface as UrlProviderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class Manager
- *
- * @package Nodes\Assets
+ * Class Manager.
  */
 class Manager
 {
     /**
-     * Upload provider
-     * 
+     * Upload provider.
+     *
      * @var \Nodes\Assets\Upload\ProviderInterface
      */
     protected $uploadProvider;
 
     /**
-     * URL provider
+     * URL provider.
      *
      * @var \Nodes\Assets\Url\ProviderInterface
      */
     protected $urlProvider;
 
     /**
-     * Manager constructor
+     * Manager constructor.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param \Nodes\Assets\Upload\ProviderInterface $uploadProvider
      * @param \Nodes\Assets\Url\ProviderInterface    $urlProvider
      */
@@ -45,11 +43,10 @@ class Manager
     }
 
     /**
-     * Save/Upload an uploaded file
+     * Save/Upload an uploaded file.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @param  string                                              $folder
      * @param  \Nodes\Assets\Upload\Settings                       $settings
@@ -60,7 +57,7 @@ class Manager
     public function addFromUploadedFile(UploadedFile $file, $folder = null, UploadSettings $settings = null)
     {
         // Generate settings
-        if (!$settings) {
+        if (! $settings) {
             $settings = new UploadSettings;
         }
 
@@ -69,11 +66,10 @@ class Manager
     }
 
     /**
-     * Save/Upload file from a Data URI
+     * Save/Upload file from a Data URI.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  string                        $dataUri
      * @param  string                        $folder
      * @param  \Nodes\Assets\Upload\Settings $settings
@@ -85,16 +81,16 @@ class Manager
     {
         // Make sure we actually have data to work with
         if (empty($dataUri)) {
-            return null;
+            return;
         }
 
         // Validate data URI
-        if (!is_string($dataUri) || !DataUri::isParsable($dataUri)) {
+        if (! is_string($dataUri) || ! DataUri::isParsable($dataUri)) {
             throw (new AssetsBadRequestException('The passed data uri is not valid data:[<mediatype>][;base64],<data>'))->setStatusCode(400);
         }
 
         // Generate settings
-        if (!$settings) {
+        if (! $settings) {
             $settings = new UploadSettings;
         }
 
@@ -103,11 +99,10 @@ class Manager
     }
 
     /**
-     * Save/Upload file from URL
+     * Save/Upload file from URL.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  string                        $url
      * @param  string                        $folder
      * @param  \Nodes\Assets\Upload\Settings $settings
@@ -119,16 +114,16 @@ class Manager
     {
         // Make sure we actually have data to work with
         if (empty($url)) {
-            return null;
+            return;
         }
 
         // Validate URL
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
             throw (new AssetsBadRequestException('The passed url is not a valid url'))->setStatusCode(400);
         }
 
         // Generate settings
-        if (!$settings) {
+        if (! $settings) {
             $settings = new UploadSettings;
         }
 
@@ -137,11 +132,10 @@ class Manager
     }
 
     /**
-     * Save/Upload file with auto-dectection of file type
+     * Save/Upload file with auto-dectection of file type.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  mixed                              $file
      * @param  string|null                        $folder
      * @param  \Nodes\Assets\Upload\Settings|null $settings
@@ -153,7 +147,7 @@ class Manager
     {
         // Make sure we actually have data to work with
         if (empty($file)) {
-            return null;
+            return;
         }
 
         // Determine what kind of save/upload method
@@ -170,11 +164,10 @@ class Manager
     }
 
     /**
-     * Generate the url from the asset path
+     * Generate the url from the asset path.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  string $path
      * @return string|null
      */
@@ -182,15 +175,15 @@ class Manager
     {
         // Make sure we have a file
         if (empty($path)) {
-            return null;
+            return;
         }
 
         // Generate file URL
         $url = $this->urlProvider->getUrlFromPath($path);
 
         // Validate file URL
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            return null;
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
+            return;
         }
 
         return $url;

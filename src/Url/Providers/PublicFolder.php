@@ -1,21 +1,19 @@
 <?php
+
 namespace Nodes\Assets\Url\Providers;
 
 use Nodes\Assets\Url\AbstractUrlProvider;
 
 /**
- * Class PublicFolder
- *
- * @package Nodes\Assets\Url\Providers
+ * Class PublicFolder.
  */
 class PublicFolder extends AbstractUrlProvider
 {
     /**
-     * Retrieve URL from assets path
+     * Retrieve URL from assets path.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  string $assetPath
      * @return string
      */
@@ -25,6 +23,6 @@ class PublicFolder extends AbstractUrlProvider
         $path = str_replace('\\', '/', $assetPath);
 
         // Generated URL for asset file
-        return ($this->getUrlProtocol() . config('nodes.assets.providers.publicFolder.domain') . '/' . config('nodes.assets.providers.publicFolder.subFolder') . '/' . $path);
+        return $this->getUrlProtocol().config('nodes.assets.providers.publicFolder.domain').'/'.config('nodes.assets.providers.publicFolder.subFolder').'/'.$path;
     }
 }

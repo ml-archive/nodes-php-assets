@@ -1,22 +1,20 @@
 <?php
+
 namespace Nodes\Assets\Upload\Providers;
 
 use Nodes\Assets\Upload\Settings;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class NodesS3
- *
- * @package Nodes\Assets\Upload\Providers
+ * Class NodesS3.
  */
 class NodesS3 extends AmazonS3
 {
     /**
-     * NodesS3 constructor
+     * NodesS3 constructor.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  array $s3Config
      * @param  array $nodesConfig
      * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
@@ -27,11 +25,10 @@ class NodesS3 extends AmazonS3
     }
 
     /**
-     * Upload file to S3
+     * Upload file to S3.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access protected
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
      * @return string
@@ -40,7 +37,7 @@ class NodesS3 extends AmazonS3
     protected function store(UploadedFile $uploadedFile, Settings $settings)
     {
         // Fallback folder is none is set
-        if (!$settings->hasFolder()) {
+        if (! $settings->hasFolder()) {
             $settings->setFolder('default');
         }
 
@@ -57,30 +54,28 @@ class NodesS3 extends AmazonS3
     }
 
     /**
-     * Retrieve path
+     * Retrieve path.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access private
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  \Nodes\Assets\Upload\Settings                       $settings
      * @return string
      */
     private function getPath(UploadedFile $uploadedFile, Settings $settings)
     {
-        return env('APP_NAME') .
-                DIRECTORY_SEPARATOR .
-                $this->getSubFolder($uploadedFile) .
-                DIRECTORY_SEPARATOR .
+        return env('APP_NAME').
+                DIRECTORY_SEPARATOR.
+                $this->getSubFolder($uploadedFile).
+                DIRECTORY_SEPARATOR.
                 $settings->getFolder();
     }
 
     /**
-     * Retrieve sub folder
+     * Retrieve sub folder.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access private
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @return string
      */
@@ -93,6 +88,7 @@ class NodesS3 extends AmazonS3
         // and other useless stuff
         if (strpos($mimeType, ';')) {
             $mimeType = explode(';', $mimeType);
+
             return strtolower($mimeType[0]);
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Nodes\Assets\Upload;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -6,11 +7,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface ProviderInterface
 {
     /**
-     * Save/Upload an uploaded file
+     * Save/Upload an uploaded file.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
      * @param  string                                              $folder
      * @param  \Nodes\Assets\Upload\Settings                       $settings
@@ -21,11 +21,10 @@ interface ProviderInterface
     public function addFromUpload(UploadedFile $uploadedFile, $folder, Settings $settings);
 
     /**
-     * Save/Upload file from URL
+     * Save/Upload file from URL.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  string                        $url
      * @param  string                        $folder
      * @param  \Nodes\Assets\Upload\Settings $settings
@@ -36,11 +35,10 @@ interface ProviderInterface
     public function addFromUrl($url, $folder, Settings $settings);
 
     /**
-     * Save/Upload file from a Data URI
+     * Save/Upload file from a Data URI.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  string                        $dataUri
      * @param  string                        $folder
      * @param  \Nodes\Assets\Upload\Settings $settings

@@ -1,28 +1,26 @@
 <?php
+
 namespace Nodes\Assets\Url\Providers;
 
 use Nodes\Assets\Url\AbstractUrlProvider;
 use Nodes\Exceptions\Exception;
 
 /**
- * Class NodesCdn
- *
- * @package Nodes\Assets\Url\Providers
+ * Class NodesCdn.
  */
 class NodesCdn extends AbstractUrlProvider
 {
     /**
-     * Config array
+     * Config array.
      *
      * @var array
      */
     protected $nodesConfig;
 
     /**
-     * NodesCdn constructor
+     * NodesCdn constructor.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param array $nodesConfig
      * @throws Exception
      */
@@ -36,7 +34,7 @@ class NodesCdn extends AbstractUrlProvider
         }
 
         // Check cloudfrontUrl has trailing /
-        if (!$this->endswith($this->nodesConfig['cloudfrontUrl'], '/')) {
+        if (! $this->endswith($this->nodesConfig['cloudfrontUrl'], '/')) {
             throw new Exception('cloudfrontUrl is missing trailing /', 500);
         }
 
@@ -46,23 +44,22 @@ class NodesCdn extends AbstractUrlProvider
         }
 
         // Check cloudfrontUrlData has trailing /
-        if (!$this->endswith($this->nodesConfig['cloudfrontUrlData'], '/')) {
+        if (! $this->endswith($this->nodesConfig['cloudfrontUrlData'], '/')) {
             throw new Exception('cloudfrontUrlData is missing trailing /', 500);
         }
 
         // Check that imageExtensionMimeTypes is correct
-        if (!isset($this->nodesConfig['imageExtensionMimeTypes']) ||
-            !is_array($this->nodesConfig['imageExtensionMimeTypes'])
+        if (! isset($this->nodesConfig['imageExtensionMimeTypes']) ||
+            ! is_array($this->nodesConfig['imageExtensionMimeTypes'])
         ) {
             throw new Exception('imageExtensionMimeTypes is missing in config or not an array', 500);
         }
     }
 
     /**
-     * Retrieve URL from assets path
+     * Retrieve URL from assets path.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param  string $assetPath
      * @throws Exception
      * @return string
@@ -85,22 +82,21 @@ class NodesCdn extends AbstractUrlProvider
         // If file type is an image, we'll have to support
         if ($fileType == 'images') {
             // Generated URL for asset file
-            return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrl'] . 'image' . DIRECTORY_SEPARATOR .
-                   env('APP_NAME') . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
+            return $this->getUrlProtocol().$this->nodesConfig['cloudfrontUrl'].'image'.DIRECTORY_SEPARATOR.
+                   env('APP_NAME').DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.
                    $filePath['basename'];
         } else {
             // Download and data folder path
-            return $this->getUrlProtocol() . $this->nodesConfig['cloudfrontUrlData'] . env('APP_NAME') .
-                   DIRECTORY_SEPARATOR . $fileType . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
+            return $this->getUrlProtocol().$this->nodesConfig['cloudfrontUrlData'].env('APP_NAME').
+                   DIRECTORY_SEPARATOR.$fileType.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.
                    $filePath['basename'];
         }
     }
 
     /**
-     * endswith
+     * endswith.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access private
      * @param $string
      * @param $test
      * @return bool

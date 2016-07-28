@@ -22,5 +22,5 @@ return [
     |
     | The domain of the public folder
     */
-    'domain' => env('APP_NAME') . '.' . env('APP_DOMAIN')
+    'domain' => env('APP_NAME').'.'.env('APP_DOMAIN'),
 ];
