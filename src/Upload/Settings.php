@@ -9,204 +9,202 @@ use Nodes\Assets\Upload\Exceptions\AssetsBadRequestException;
  * @author  Casper Rasmussen <cr@nodes.dk>
  * @package Nodes\Assets\Upload
  */
-class Settings {
+class Settings
+{
 
-	/**
-	 * Folder name
-	 *
-	 * @var string|null
-	 */
-	protected $folder;
+    /**
+     * Folder name
+     *
+     * @var string|null
+     */
+    protected $folder;
 
-	/**
-	 * File extension
-	 *
-	 * @var string|null
-	 */
-	protected $fileExtension;
+    /**
+     * File extension
+     *
+     * @var string|null
+     */
+    protected $fileExtension;
 
-	/**
-	 * Filename
-	 *
-	 * @var string|null
-	 */
-	protected $fileName;
-
-
-	/**
-	 * Validate required data
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return void
-	 * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
-	 */
-	public function checkRequiredData()
-	{
-		// Validate filename
-		if ( ! $this->hasFilename())
-		{
-			throw new AssetsBadRequestException('Missing filename, cannot upload with a empty filename');
-		}
-
-		// Validate file extension
-		if ( ! $this->hasFileExtension())
-		{
-			throw new AssetsBadRequestException('Missing file extension, cannot upload with a empty file extension');
-		}
-	}
+    /**
+     * Filename
+     *
+     * @var string|null
+     */
+    protected $fileName;
 
 
-	/**
-	 * Check if filename is present
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return boolean
-	 */
-	public function hasFilename()
-	{
-		return boolval($this->fileName);
-	}
+    /**
+     * Validate required data
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return void
+     * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
+     */
+    public function checkRequiredData()
+    {
+        // Validate filename
+        if ( ! $this->hasFilename()) {
+            throw new AssetsBadRequestException('Missing filename, cannot upload with a empty filename');
+        }
+
+        // Validate file extension
+        if ( ! $this->hasFileExtension()) {
+            throw new AssetsBadRequestException('Missing file extension, cannot upload with a empty file extension');
+        }
+    }
 
 
-	/**
-	 * Retrieve filename
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return string|null
-	 */
-	public function getFileName()
-	{
-		return $this->fileName;
-	}
+    /**
+     * Check if filename is present
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return boolean
+     */
+    public function hasFilename()
+    {
+        return boolval($this->fileName);
+    }
 
 
-	/**
-	 * Set filename
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 *
-	 * @param  $fileName
-	 *
-	 * @return \Nodes\Assets\Upload\Settings
-	 */
-	public function setFileName($fileName)
-	{
-		$this->fileName = $fileName;
-
-		return $this;
-	}
+    /**
+     * Retrieve filename
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string|null
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
 
 
-	/**
-	 * Check if file extension is present
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return boolean
-	 */
-	public function hasFileExtension()
-	{
-		return ! empty($this->fileExtension);
-	}
+    /**
+     * Set filename
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     *
+     * @param  $fileName
+     *
+     * @return \Nodes\Assets\Upload\Settings
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
 
 
-	/**
-	 * Retrieve file extension
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return string|null
-	 */
-	public function getFileExtension()
-	{
-		return $this->fileExtension;
-	}
+    /**
+     * Check if file extension is present
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return boolean
+     */
+    public function hasFileExtension()
+    {
+        return ! empty( $this->fileExtension );
+    }
 
 
-	/**
-	 * Set file extension
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 *
-	 * @param  $fileExtension
-	 *
-	 * @return \Nodes\Assets\Upload\Settings
-	 */
-	public function setFileExtension($fileExtension)
-	{
-		$this->fileExtension = $fileExtension;
-
-		return $this;
-	}
+    /**
+     * Retrieve file extension
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string|null
+     */
+    public function getFileExtension()
+    {
+        return $this->fileExtension;
+    }
 
 
-	/**
-	 * Check if folder name is present
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return boolean
-	 */
-	public function hasFolder()
-	{
-		return boolval($this->folder);
-	}
+    /**
+     * Set file extension
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     *
+     * @param  $fileExtension
+     *
+     * @return \Nodes\Assets\Upload\Settings
+     */
+    public function setFileExtension($fileExtension)
+    {
+        $this->fileExtension = $fileExtension;
+
+        return $this;
+    }
 
 
-	/**
-	 * Retrieve folder name
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return string|null
-	 */
-	public function getFolder()
-	{
-		return $this->folder;
-	}
+    /**
+     * Check if folder name is present
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return boolean
+     */
+    public function hasFolder()
+    {
+        return boolval($this->folder);
+    }
 
 
-	/**
-	 * Set folder name
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 *
-	 * @param  string $folder
-	 *
-	 * @return \Nodes\Assets\Upload\Settings
-	 */
-	public function setFolder($folder)
-	{
-		$this->folder = ! empty($folder) ? $folder : config('nodes.assetsv2.general.default.folder');
-
-		return $this;
-	}
+    /**
+     * Retrieve folder name
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string|null
+     */
+    public function getFolder()
+    {
+        return $this->folder;
+    }
 
 
-	/**
-	 * Retrieve file path
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access public
-	 * @return string
-	 */
-	public function getFilePath()
-	{
-		// Generate filename with extension
-		$path = $this->fileName . '.' . $this->fileExtension;
+    /**
+     * Set folder name
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     *
+     * @param  string $folder
+     *
+     * @return \Nodes\Assets\Upload\Settings
+     */
+    public function setFolder($folder)
+    {
+        $this->folder = ! empty( $folder ) ? $folder : config('nodes.assetsv2.general.default.folder');
 
-		// Prepend folder if present
-		if ($this->hasFolder())
-		{
-			$path = $this->folder . DIRECTORY_SEPARATOR . $path;
-		}
+        return $this;
+    }
 
-		return $path;
-	}
+
+    /**
+     * Retrieve file path
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string
+     */
+    public function getFilePath()
+    {
+        // Generate filename with extension
+        $path = $this->fileName . '.' . $this->fileExtension;
+
+        // Prepend folder if present
+        if ($this->hasFolder()) {
+            $path = $this->folder . DIRECTORY_SEPARATOR . $path;
+        }
+
+        return $path;
+    }
 }

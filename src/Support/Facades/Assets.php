@@ -8,17 +8,18 @@ use Illuminate\Support\Facades\Facade;
  *
  * @package Nodes\Support\Facades
  */
-class Assets extends Facade {
+class Assets extends Facade
+{
 
-	/**
-	 * Get the registered name of the component
-	 *
-	 * @author Casper Rasmussen <cr@nodes.dk>
-	 * @access protected
-	 * @return string
-	 */
-	protected static function getFacadeAccessor()
-	{
-		return 'nodes.assets';
-	}
+    /**
+     * Get the registered name of the component
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access protected
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'nodes.assets';
+    }
 }
