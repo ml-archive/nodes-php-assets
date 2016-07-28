@@ -27,6 +27,6 @@ class PublicFolder extends AbstractUrlProvider
         $path = str_replace('\\', '/', $assetPath);
 
         // Generated URL for asset file
-        return ( $this->getUrlProtocol() . config('nodes.assets.providers.publicFolder.domain') . '/' . config('nodes.assets.providers.publicFolder.subFolder') . '/' . $path );
+        return ($this->getUrlProtocol().config('nodes.assets.providers.publicFolder.domain').'/'.config('nodes.assets.providers.publicFolder.subFolder').'/'.$path);
     }
 }

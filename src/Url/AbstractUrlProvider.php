@@ -19,6 +19,6 @@ abstract class AbstractUrlProvider implements ProviderInterface
      */
     protected function getUrlProtocol()
     {
-        return ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) ? 'https://' : 'http://';
+        return ( ! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
     }
 }

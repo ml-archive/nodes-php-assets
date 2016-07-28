@@ -36,8 +36,8 @@ class AmazonS3 extends AbstractUploadProvider
     public function __construct(array $s3Config)
     {
         // Validate credentials
-        if (empty( $s3Config ) || $s3Config['key'] == 'your-key') {
-            throw ( new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems') )->setStatusCode(400);
+        if (empty($s3Config) || $s3Config['key'] == 'your-key') {
+            throw (new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems'))->setStatusCode(400);
         }
 
         // Set S3 bucket
@@ -63,7 +63,7 @@ class AmazonS3 extends AbstractUploadProvider
             // Upload to bucket
             \Storage::disk('s3')->put($settings->getFilePath(), file_get_contents($uploadedFile->getRealPath()));
         } catch (\Exception $e) {
-            throw new AssetsUploadFailedException('Could not upload file to Amazon S3. Reason: ' . $e->getMessage());
+            throw new AssetsUploadFailedException('Could not upload file to Amazon S3. Reason: '.$e->getMessage());
         }
 
         return $settings->getFilePath();

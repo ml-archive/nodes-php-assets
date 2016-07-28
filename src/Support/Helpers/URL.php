@@ -36,24 +36,24 @@ if ( ! function_exists('assets_resize')) {
         }
 
         // Init query
-        $query = [ ];
+        $query = [];
 
         // Add w query param
         if ($width && is_numeric($width) && $width > 0) {
-            $query['w'] = (int) $width;
+            $query['w'] = (int)$width;
         }
 
         // Add h query param
         if ($height && is_numeric($height) && $height > 0) {
-            $query['h'] = (int) $height;
+            $query['h'] = (int)$height;
         }
 
         // Check if query is empty
-        if (empty( $query )) {
+        if (empty($query)) {
             return $url;
         }
 
         // Append the query string
-        return $url . '?' . http_build_query($query);
+        return $url.'?'.http_build_query($query);
     }
 }

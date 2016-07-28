@@ -74,7 +74,7 @@ class NodesS3 extends AmazonS3
      */
     private function getPath(UploadedFile $uploadedFile, Settings $settings)
     {
-        return env('APP_NAME') . DIRECTORY_SEPARATOR . $this->getSubFolder($uploadedFile) . DIRECTORY_SEPARATOR . $settings->getFolder();
+        return env('APP_NAME').DIRECTORY_SEPARATOR.$this->getSubFolder($uploadedFile).DIRECTORY_SEPARATOR.$settings->getFolder();
     }
 
 
@@ -107,6 +107,6 @@ class NodesS3 extends AmazonS3
         // Split mime-type into type and extension
         $mimeType = explode('/', $mimeType);
 
-        return ( $mimeType[0] == 'image' ) ? 'images/original' : 'data';
+        return ($mimeType[0] == 'image') ? 'images/original' : 'data';
     }
 }

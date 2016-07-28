@@ -90,13 +90,13 @@ class Manager
     public function addFromDataUri($dataUri, $folder = null, UploadSettings $settings = null)
     {
         // Make sure we actually have data to work with
-        if (empty( $dataUri )) {
+        if (empty($dataUri)) {
             return null;
         }
 
         // Validate data URI
         if ( ! is_string($dataUri) || ! DataUri::isParsable($dataUri)) {
-            throw ( new AssetsBadRequestException('The passed data uri is not valid data:[<mediatype>][;base64],<data>') )->setStatusCode(400);
+            throw (new AssetsBadRequestException('The passed data uri is not valid data:[<mediatype>][;base64],<data>'))->setStatusCode(400);
         }
 
         // Generate settings
@@ -126,13 +126,13 @@ class Manager
     public function addFromUrl($url, $folder = null, UploadSettings $settings = null)
     {
         // Make sure we actually have data to work with
-        if (empty( $url )) {
+        if (empty($url)) {
             return null;
         }
 
         // Validate URL
         if ( ! filter_var($url, FILTER_VALIDATE_URL)) {
-            throw ( new AssetsBadRequestException('The passed url is not a valid url') )->setStatusCode(400);
+            throw (new AssetsBadRequestException('The passed url is not a valid url'))->setStatusCode(400);
         }
 
         // Generate settings
@@ -162,7 +162,7 @@ class Manager
     public function add($file, $folder = null, UploadSettings $settings = null)
     {
         // Make sure we actually have data to work with
-        if (empty( $file )) {
+        if (empty($file)) {
             return null;
         }
 
@@ -175,7 +175,7 @@ class Manager
         } elseif ($file instanceof UploadedFile) {
             return $this->addFromUploadedFile($file, $folder, $settings);
         } else {
-            throw ( new AssetsBadRequestException('Uploaded file/string type is not supported') )->setStatusCode(400);
+            throw (new AssetsBadRequestException('Uploaded file/string type is not supported'))->setStatusCode(400);
         }
     }
 
@@ -193,7 +193,7 @@ class Manager
     public function get($path)
     {
         // Make sure we have a file
-        if (empty( $path )) {
+        if (empty($path)) {
             return null;
         }
 
