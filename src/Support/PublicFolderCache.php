@@ -9,8 +9,6 @@ namespace Nodes\Assets\Support;
 class PublicFolderCache
 {
     /**
-     * cache.
-     *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
      * @param null $width
@@ -40,7 +38,7 @@ class PublicFolderCache
     }
 
     /**
-     * getFullPath.
+     * Get full path to image
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
@@ -52,7 +50,7 @@ class PublicFolderCache
     }
 
     /**
-     * fileExists.
+     * Check if file exists
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
@@ -66,7 +64,7 @@ class PublicFolderCache
     }
 
     /**
-     * fullCacheFilePath.
+     * Get full cache path.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
@@ -80,7 +78,7 @@ class PublicFolderCache
     }
 
     /**
-     * resizeImage.
+     * Resize the image.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $original
@@ -114,7 +112,7 @@ class PublicFolderCache
     }
 
     /**
-     * cropImage.
+     * Crop the image.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $original
@@ -145,7 +143,7 @@ class PublicFolderCache
     }
 
     /**
-     * showFile.
+     * Show the specified file in the browser.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path

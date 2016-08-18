@@ -13,7 +13,7 @@ use Nodes\Assets\Support\PublicFolderCache;
 class PublicFolderCdnController extends Controller
 {
     /**
-     * cdn.
+     * Assets CDN endpoint.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param Request $request
@@ -31,34 +31,26 @@ class PublicFolderCdnController extends Controller
 
         $path = $folder . '/' . $file;
 
-        $filePath = pathinfo($path);
-
-        $fileType = array_key_exists(strtolower($filePath['extension']), config('nodes.assets.providers.publicFolder.imageExtensionMimeTypes')) ? 'images' : 'data';
-
-        if ($fileType == 'images') {
-            if (isset($input['mode'])) {
-                $mode = $input['mode'];
-            }
-
-            if (isset($input['width'])) {
-                $width = $input['width'];
-            }
-
-            if (isset($input['height'])) {
-                $height = $input['height'];
-            }
-
-            if (isset($input['w'])) {
-                $width = $input['w'];
-            }
-
-            if (isset($input['h'])) {
-                $height = $input['h'];
-            }
-
-            return app(PublicFolderCache::class)->cache($path, $width, $height, $mode);
-        } else {
-            return app(PublicFolderCache::class)->showFile($path);
+        if (isset($input['mode'])) {
+            $mode = $input['mode'];
         }
+
+        if (isset($input['width'])) {
+            $width = $input['width'];
+        }
+
+        if (isset($input['height'])) {
+            $height = $input['height'];
+        }
+
+        if (isset($input['w'])) {
+            $width = $input['w'];
+        }
+
+        if (isset($input['h'])) {
+            $height = $input['h'];
+        }
+
+        return app(PublicFolderCache::class)->cache($path, $width, $height, $mode);
     }
 }
