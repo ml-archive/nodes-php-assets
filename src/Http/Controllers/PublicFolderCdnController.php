@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Nodes\Assets\Http\Controllers;
 
@@ -29,7 +29,7 @@ class PublicFolderCdnController extends Controller
 
         $input = $request->input();
 
-        $path = $folder . '/' . $file;
+        $path = $folder.'/'.$file;
 
         if (isset($input['mode'])) {
             $mode = $input['mode'];

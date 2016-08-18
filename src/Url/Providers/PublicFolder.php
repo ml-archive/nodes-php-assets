@@ -32,6 +32,7 @@ class PublicFolder extends AbstractUrlProvider
             return  $this->getUrlProtocol().config('nodes.assets.providers.publicFolder.domain').'/'.config('nodes.assets.providers.publicFolder.subFolder').'/'.$path;
         } else {
             $fileParts = explode('/', $path);
+            
             return route('nodes.assets.public_folder.cdn', $fileParts);
         }
     }
