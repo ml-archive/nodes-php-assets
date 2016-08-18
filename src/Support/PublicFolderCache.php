@@ -11,12 +11,12 @@ class PublicFolderCache
 {
     /**
      * Check if the file already exists as "cached" or if it's the original file. If not cached we want to resize/crop
-     * depending on the mode
+     * depending on the mode.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
-     * @param integer|null $width
-     * @param integer|null $height
+     * @param int|null $width
+     * @param int|null $height
      * @param string $mode
      * @return mixed
      */
@@ -88,8 +88,8 @@ class PublicFolderCache
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param string $original
      * @param string $path
-     * @param integer|null $width
-     * @param integer|null $height
+     * @param int|null $width
+     * @param int|null $height
      * @return mixed
      */
     public function resizeImage($original, $path, $width, $height)
@@ -122,8 +122,8 @@ class PublicFolderCache
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param string $original
      * @param string $path
-     * @param integer|null $width
-     * @param integer|null $height
+     * @param int|null $width
+     * @param int|null $height
      * @return mixed
      */
     public function cropImage($original, $path, $width, $height)
