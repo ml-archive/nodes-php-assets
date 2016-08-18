@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nodes\Assets\Support;
@@ -49,11 +50,11 @@ class PublicFolderCache
      */
     public function getFullPath($path)
     {
-        return public_path(config('nodes.assets.providers.publicFolder.subFolder')) . DIRECTORY_SEPARATOR . $path;
+        return public_path(config('nodes.assets.providers.publicFolder.subFolder')).DIRECTORY_SEPARATOR.$path;
     }
 
     /**
-     * Check if file exists
+     * Check if file exists.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
