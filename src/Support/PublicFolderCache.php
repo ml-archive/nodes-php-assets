@@ -9,13 +9,14 @@ namespace Nodes\Assets\Support;
 class PublicFolderCache
 {
     /**
-     * cache.
+     * Check if the file already exists as "cached" or if it's the original file. If not cached we want to resize/crop
+     * depending on the mode
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param $path
-     * @param null $width
-     * @param null $height
-     * @param $mode
+     * @param integer|null $width
+     * @param integer|null $height
+     * @param string $mode
      * @return mixed
      */
     public function cache($path, $width, $height, $mode)
@@ -44,7 +45,7 @@ class PublicFolderCache
      * Get full path to image.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
-     * @param $path
+     * @param string $path
      * @return string
      */
     public function getFullPath($path)
@@ -56,7 +57,7 @@ class PublicFolderCache
      * Check if file exists
      *
      * @author Jonas Schwartz <josc@nodes.dk>
-     * @param $path
+     * @param string $path
      * @return bool
      */
     public function fileExists($path)
@@ -70,9 +71,9 @@ class PublicFolderCache
      * Get full cache path.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
-     * @param $path
-     * @param $size
-     * @param $mode
+     * @param string $path
+     * @param string $size
+     * @param string $mode
      * @return string
      */
     public function fullCacheFilePath($path, $size, $mode)
@@ -84,10 +85,10 @@ class PublicFolderCache
      * Resize the image.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
-     * @param $original
-     * @param $path
-     * @param $width
-     * @param $height
+     * @param string $original
+     * @param string $path
+     * @param integer|null $width
+     * @param integer|null $height
      * @return mixed
      */
     public function resizeImage($original, $path, $width, $height)
@@ -118,10 +119,10 @@ class PublicFolderCache
      * Crop the image.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
-     * @param $original
-     * @param $path
-     * @param $width
-     * @param $height
+     * @param string $original
+     * @param string $path
+     * @param integer|null $width
+     * @param integer|null $height
      * @return mixed
      */
     public function cropImage($original, $path, $width, $height)
@@ -149,7 +150,7 @@ class PublicFolderCache
      * Show the specified file in the browser.
      *
      * @author Jonas Schwartz <josc@nodes.dk>
-     * @param $path
+     * @param string $path
      * @return mixed
      */
     public function showFile($path)

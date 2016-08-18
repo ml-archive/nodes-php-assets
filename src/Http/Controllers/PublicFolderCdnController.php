@@ -17,8 +17,8 @@ class PublicFolderCdnController extends Controller
      *
      * @author Jonas Schwartz <josc@nodes.dk>
      * @param Request $request
-     * @param $folder
-     * @param $file
+     * @param string $folder
+     * @param string $file
      * @return mixed
      */
     public function cdn(Request $request, $folder, $file)
