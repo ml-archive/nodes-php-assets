@@ -51,7 +51,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
         // Route files
         $this->publishes([
-            __DIR__ . '/../routes' => base_path('project/Routes/Frontend'),
+            __DIR__.'/../routes' => base_path('project/Routes/Frontend'),
         ], 'routes');
     }
 
