@@ -48,6 +48,11 @@ class ServiceProvider extends IlluminateServiceProvider
             __DIR__.'/../config/providers/publicFolder.php' => config_path('nodes/assets/providers/publicFolder.php'),
             __DIR__.'/../config/general.php'                => config_path('nodes/assets/general.php'),
         ], 'config');
+
+        // Route files
+        $this->publishes([
+            __DIR__.'/../routes' => base_path('project/Routes/Frontend'),
+        ], 'routes');
     }
 
     /**

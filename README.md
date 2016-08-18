@@ -67,6 +67,32 @@ If you want to overwrite any existing config files use the `--force` parameter
 php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider" --force
 ```
 
+### Public Folder
+
+Public folder method can resize images. To setup, you need Intervention image lib. To install run
+
+```bash
+composer require intervention/image
+```
+
+Then add the following to app.php
+
+**providers** array
+```php
+Intervention\Image\ImageServiceProvider::class
+```
+
+**aliases** array
+```php
+'Image' => Intervention\Image\Facades\Image::class
+```
+
+finally run
+```bash
+php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"
+```
+
+
 ## ⚙ Usage
 
 ### Global methods

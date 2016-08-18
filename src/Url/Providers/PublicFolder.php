@@ -23,7 +23,17 @@ class PublicFolder extends AbstractUrlProvider
         // Ensure platform independency
         $path = str_replace('\\', '/', $assetPath);
 
-        // Generated URL for asset file
-        return  $this->getUrlProtocol().config('nodes.assets.providers.publicFolder.domain').'/'.config('nodes.assets.providers.publicFolder.subFolder').'/'.$path;
+        $filePath = pathinfo($path);
+
+        $fileType = array_key_exists(strtolower($filePath['extension']), config('nodes.assets.providers.publicFolder.imageExtensionMimeTypes')) ? 'images' : 'data';
+
+        // If the asset is type 'data', show the raw file. If it's 'image' we want to use the CDN
+        if ($fileType == 'data') {
+            return  $this->getUrlProtocol().config('nodes.assets.providers.publicFolder.domain').'/'.config('nodes.assets.providers.publicFolder.subFolder').'/'.$path;
+        } else {
+            $fileParts = explode('/', $path);
+
+            return route('nodes.assets.public_folder.cdn', $fileParts);
+        }
     }
 }
