@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Nodes\Assets\Support;
 
@@ -15,17 +16,17 @@ class PublicFolderCache
      * @param null $height
      * @return mixed
      */
-    public function cache($path, $width = null, $height = null, $mode)
+    public function cache($path, $width, $height, $mode)
     {
         if (empty($width) && empty($height)) {
             $path = $this->getFullPath($path);
 
             return $this->showFile($path);
         } else {
-            $size = $width . 'x' . $height;
+            $size = $width.'x'.$height;
             $cachePath = $this->fullCacheFilePath($path, $size, $mode);
 
-            if (!$this->fileExists($cachePath)) {
+            if (! $this->fileExists($cachePath)) {
                 if ($mode == 'resize') {
                     return $this->resizeImage($path, $cachePath, $width, $height);
                 } else {
@@ -46,7 +47,7 @@ class PublicFolderCache
      */
     public function getFullPath($path)
     {
-        return public_path(config('nodes.assets.providers.publicFolder.subFolder')) . DIRECTORY_SEPARATOR . $path;
+        return public_path(config('nodes.assets.providers.publicFolder.subFolder')).DIRECTORY_SEPARATOR.$path;
     }
 
     /**
@@ -74,7 +75,7 @@ class PublicFolderCache
      */
     public function fullCacheFilePath($path, $size, $mode)
     {
-        return $this->getFullPath('cache/' . $mode . '/' . $size . '/' . $path);
+        return $this->getFullPath('cache/'.$mode.'/'.$size.'/'.$path);
     }
 
     /**
@@ -101,7 +102,7 @@ class PublicFolderCache
 
         $file = \File::get($original);
 
-        $img = \Image::make($file)->resize($width, $height, function($constraint) {
+        $img = \Image::make($file)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
