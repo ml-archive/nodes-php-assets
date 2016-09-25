@@ -8,7 +8,7 @@ if (! function_exists('assets_get')) {
      *
      * @param                                 $path
      *
-     * @return string $url
+     * @return string|null $url
      */
     function assets_get($path)
     {
