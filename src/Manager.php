@@ -180,7 +180,7 @@ class Manager
     {
         // Make sure we have a file
         if (empty($path)) {
-            return;
+            return null;
         }
 
         // Generate file URL
@@ -188,7 +188,7 @@ class Manager
 
         // Validate file URL
         if (! filter_var($url, FILTER_VALIDATE_URL)) {
-            return;
+            return null;
         }
 
         return $url;
