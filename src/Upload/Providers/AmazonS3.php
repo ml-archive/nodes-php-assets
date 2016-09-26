@@ -32,9 +32,9 @@ class AmazonS3 extends AbstractUploadProvider
     public function __construct(array $s3Config)
     {
         // Validate credentials
-        if (empty($s3Config) || $s3Config['key'] == 'your-key' || $s3Config['secret'] = "AMAZON_SECRET" ||
-                                                                                        $s3Config['region'] = "AMAZON_REGION" ||
-                                                                                                              $s3Config['bucket'] = "AMAZON_BUCKET") {
+        if (empty($s3Config) || $s3Config['key'] == 'your-key'|| $s3Config['secret'] == "AMAZON_SECRET" ||
+                                                                                        $s3Config['region'] == "AMAZON_REGION" ||
+                                                                                                              $s3Config['bucket'] == "AMAZON_BUCKET") {
             throw ( new AssetsBadRequestException('Missing credentials for s3 - These can be found in config/filesystems') )->setStatusCode(400);
         }
 
