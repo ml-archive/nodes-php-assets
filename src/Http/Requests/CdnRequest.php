@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 
 namespace Nodes\Assets\Http\Requests;
@@ -74,6 +74,4 @@ class CdnRequest extends FormRequest
     {
         return response()->json(['errors' => $errors], 412);
     }
-
-
 }
