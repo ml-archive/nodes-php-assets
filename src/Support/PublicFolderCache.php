@@ -130,7 +130,7 @@ class PublicFolderCache
     {
         $original = $this->getFullPath($original);
 
-        // Create folder if it dosn't exist
+        // Create folder if it doesn't exist
         $pathArray = explode('/', $path);
         array_pop($pathArray);
         $folder = implode('/', $pathArray);
