@@ -33,10 +33,10 @@ class CdnRequest extends FormRequest
     {
         return [
             'mode'   => ['in:resize,crop'],
-            'width'  => ['required_with:height', 'integer', 'min:1'],
-            'height' => ['required_with:width', 'integer', 'min:1'],
-            'w'      => ['required_with:h', 'integer', 'min:1'],
-            'h'      => ['required_with:w', 'integer', 'min:1'],
+            'width'  => ['nullable', 'integer', 'min:1'],
+            'height' => ['nullable', 'integer', 'min:1'],
+            'w'      => ['nullable', 'integer', 'min:1'],
+            'h'      => ['nullable', 'integer', 'min:1'],
             'folder' => ['string'],
             'file'   => ['string'],
         ];
@@ -55,6 +55,10 @@ class CdnRequest extends FormRequest
 
         $data['folder'] = $this->route('folder');
         $data['file']   = $this->route('file');
+        $data['width']  = $this->query('width');
+        $data['height'] = $this->query('height');
+        $data['w']      = $this->query('w');
+        $data['h']      = $this->query('h');
 
         return $data;
     }

@@ -72,18 +72,37 @@ class PublicFolderCdnControllerTest extends Orchestra\Testbench\TestCase
     public function cdn_validInput_dataProvider()
     {
         return [
-            'allData' => [
+            'allDataResize'    => [
                 [
                     'mode'   => 'resize',
                     'width'  => 250,
                     'height' => 250,
                 ],
             ],
-            'shorter' => [
+            'allDataCrop'    => [
+                [
+                    'mode'   => 'crop',
+                    'width'  => 250,
+                    'height' => 250,
+                ],
+            ],
+            'shorter'    => [
                 [
                     'mode' => 'resize',
                     'w'    => 250,
                     'h'    => 250,
+                ],
+            ],
+            'onlyWidth'  => [
+                [
+                    'mode'  => 'resize',
+                    'width' => 250,
+                ],
+            ],
+            'onlyHeight' => [
+                [
+                    'mode'   => 'resize',
+                    'height' => 250,
                 ],
             ],
         ];
@@ -92,37 +111,25 @@ class PublicFolderCdnControllerTest extends Orchestra\Testbench\TestCase
     public function cdn_invalidInput_dataProvider()
     {
         return [
-            'invalidMode'        => [
+            'invalidMode'   => [
                 [
                     'mode'   => uniqid(),
                     'width'  => 250,
                     'height' => 250,
                 ],
             ],
-            'invalidWidth'       => [
+            'invalidWidth'  => [
                 [
                     'mode'   => 'resize',
                     'width'  => 0,
                     'height' => 250,
                 ],
             ],
-            'heightWithoutWidth' => [
-                [
-                    'mode'   => 'resize',
-                    'height' => 250,
-                ],
-            ],
-            'invalidHeight'      => [
+            'invalidHeight' => [
                 [
                     'mode'   => 'resize',
                     'width'  => 250,
                     'height' => 0,
-                ],
-            ],
-            'widthWithoutHeight' => [
-                [
-                    'mode'  => 'resize',
-                    'width' => 250,
                 ],
             ],
         ];
