@@ -175,7 +175,7 @@ class Settings
     public function getFilePath()
     {
         // Generate filename with extension
-        $path = $this->fileName.'.'.$this->fileExtension;
+        $path = $this->fileName . '.' . strtolower($this->fileExtension);
 
         // Prepend folder if present
         if ($this->hasFolder()) {
