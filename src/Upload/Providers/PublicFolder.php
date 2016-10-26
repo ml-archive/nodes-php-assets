@@ -29,6 +29,11 @@ class PublicFolder extends AbstractUploadProvider
      */
     protected function store(UploadedFile $uploadedFile, Settings $settings)
     {
+        // Fallback folder is none is set
+        if (! $settings->hasFolder()) {
+            $settings->setFolder('default');
+        }
+
         try {
             // Retrieve folder path
             $path = public_path(config('nodes.assets.providers.publicFolder.subFolder')).DIRECTORY_SEPARATOR.$settings->getFolder();

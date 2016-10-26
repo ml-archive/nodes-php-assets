@@ -92,6 +92,23 @@ finally run
 php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"
 ```
 
+#### Configure for public folder
+Modify the configuration in `config/nodes/assets/general.php`
+```php
+return [
+    'upload' => [
+        'provider' => function () {
+            return new \Nodes\Assets\Upload\Providers\PublicFolder();
+        },
+    ],
+    'url'    => [
+        'provider' => function () {
+            return new \Nodes\Assets\Url\Providers\PublicFolder();
+        },
+    ],
+];
+```
+
 
 ## ⚙ Usage
 
