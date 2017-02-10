@@ -124,7 +124,12 @@ abstract class AbstractUploadProvider implements ProviderInterface
         $settings->checkRequiredData();
 
         // Process file
-        return $this->store($uploadedFile, $settings);
+        $storedFile = $this->store($uploadedFile, $settings);
+
+        // delete tmp file
+        unlink($file);
+
+        return $storedFile;
     }
 
     /**
