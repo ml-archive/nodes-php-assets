@@ -236,7 +236,7 @@ abstract class AbstractUploadProvider implements ProviderInterface
 
         // Return extension is available
         if (! empty($fileInfo['extension'])) {
-            return $fileInfo['extension'];
+            return strtolower($fileInfo['extension']);
         }
 
         throw ( new AssetsBadRequestException('Cannot detect file extension, provide it before uploading.') )->setStatusCode(400);
