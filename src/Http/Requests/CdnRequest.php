@@ -49,7 +49,7 @@ class CdnRequest extends FormRequest
      * @access public
      * @return array
      */
-    public function all()
+    public function all($keys = NULL)
     {
         $data = parent::all();
 
