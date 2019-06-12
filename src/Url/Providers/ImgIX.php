@@ -16,11 +16,12 @@ class ImgIX extends AbstractUrlProvider
     protected $url;
 
     /**
-     * NodesCdn constructor.
+     * ImgIX constructor
      *
-     * @param array $nodesConfig
-     * @throws Exception
+     * @param array $imgIxConfig
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
      */
     public function __construct(array $imgIxConfig)
     {

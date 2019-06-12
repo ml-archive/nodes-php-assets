@@ -41,7 +41,7 @@ class AmazonS3 extends AbstractUploadProvider
 
         // Set S3 bucket
         $this->bucket = $s3Config['bucket'];
-        $this->folder = $awsS3Config['folder'];
+        $this->folder = $awsS3Config['folder'] ?? null;
     }
 
     /**

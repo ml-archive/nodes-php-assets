@@ -12,5 +12,5 @@ return [
     | Without protocol and without trailing slash.
     |
     */
-    'url' => env('AMAZON_CLOUDFRONT_URL'),
+    'url' => env('CDN_BASE_URL'),
 ];

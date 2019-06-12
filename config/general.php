@@ -12,8 +12,9 @@ return [
     'upload' => [
         'provider' => function () {
             $s3Config = config('filesystems.disks.s3');
-            $awsS3Config = config('nodes.assets.provider.aws-s3');
-            return new \Nodes\Assets\Upload\Providers\AmazonS3($awsS3Config, $s3Config);
+            $vaporCloudConfig = config('nodes.assets.providers.vapor-cloud');
+
+            return new \Nodes\Assets\Upload\Providers\VaporCloud($s3Config, $vaporCloudConfig);
         },
     ],
     /*
@@ -26,9 +27,9 @@ return [
      */
     'url'    => [
         'provider' => function () {
-            $imgIxConfig = config('nodes.assets.providers.imgix');
+            $vaporCloudConfig = config('nodes.assets.providers.vapor-cloud');
 
-            return new \Nodes\Assets\Url\Providers\ImgIX($imgIxConfig);
+            return new \Nodes\Assets\Url\Providers\VaporCloud($vaporCloudConfig);
         },
     ],
 ];
