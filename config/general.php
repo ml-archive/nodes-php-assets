@@ -12,9 +12,8 @@ return [
     'upload' => [
         'provider' => function () {
             $s3Config = config('filesystems.disks.s3');
-            $nodesConfig = config('nodes.assets.providers.nodes');
-
-            return new \Nodes\Assets\Upload\Providers\NodesS3($s3Config, $nodesConfig);
+            $awsS3Config = config('nodes.assets.provider.aws-s3');
+            return new \Nodes\Assets\Upload\Providers\AmazonS3($awsS3Config, $s3Config);
         },
     ],
     /*
@@ -27,9 +26,9 @@ return [
      */
     'url'    => [
         'provider' => function () {
-            $nodesConfig = config('nodes.assets.providers.nodes');
+            $imgIxConfig = config('nodes.assets.providers.imgix');
 
-            return new \Nodes\Assets\Url\Providers\NodesCdn($nodesConfig);
+            return new \Nodes\Assets\Url\Providers\ImgIX($imgIxConfig);
         },
     ],
 ];
