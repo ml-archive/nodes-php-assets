@@ -9,27 +9,28 @@ use Nodes\Assets\Upload\Settings;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class AmazonS3.
+ * Class AmazonS3
+ *
+ * @package Nodes\Assets\Upload\Providers
  */
 class AmazonS3 extends AbstractUploadProvider
 {
-    /**
-     * Name of bucket.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $bucket;
 
+    /** @var string|null */
+    protected $folder;
+
     /**
-     * AmazonS3 constructor.
+     * AmazonS3 constructor
      *
-     * @author Morten Rugaard <moru@nodes.dk>
+     * @param array $awsS3Config
+     * @param array $s3Config
+     * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @param  array $s3Config
-     *
-     * @throws \Nodes\Assets\Upload\Exceptions\AssetsBadRequestException
+     * @access public
      */
-    public function __construct(array $s3Config)
+    public function __construct(array $awsS3Config, array $s3Config)
     {
         // Validate credentials
         if (empty($s3Config) || $s3Config['key'] == 'your-key'|| $s3Config['secret'] == "AMAZON_SECRET" ||
@@ -40,6 +41,7 @@ class AmazonS3 extends AbstractUploadProvider
 
         // Set S3 bucket
         $this->bucket = $s3Config['bucket'];
+        $this->folder = $awsS3Config['folder'] ?? null;
     }
 
     /**
@@ -55,13 +57,21 @@ class AmazonS3 extends AbstractUploadProvider
      */
     protected function store(UploadedFile $uploadedFile, Settings $settings)
     {
+        $path = '';
+
+        if($this->folder) {
+            $path .= $this->folder . DIRECTORY_SEPARATOR;
+        }
+
+        $path .= $settings->getFilePath();
+
         try {
             // Upload to bucket
-            \Storage::disk('s3')->put($settings->getFilePath(), file_get_contents($uploadedFile->getRealPath()));
+            \Storage::disk('s3')->put($path, file_get_contents($uploadedFile->getRealPath()));
         } catch (\Exception $e) {
             throw new AssetsUploadFailedException('Could not upload file to Amazon S3. Reason: '.$e->getMessage());
         }
 
-        return $settings->getFilePath();
+        return $path;
     }
 }

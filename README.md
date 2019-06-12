@@ -67,6 +67,82 @@ If you want to overwrite any existing config files use the `--force` parameter
 php artisan vendor:publish --provider="Nodes\Assets\ServiceProvider" --force
 ```
 
+### S3 + ImgIX
+
+In general.php config
+```php
+'upload' => [
+        'provider' => function () {
+            $s3Config = config('filesystems.disks.s3');
+            $awsS3Config = config('nodes.assets.provider.aws-s3');
+            return new \Nodes\Assets\Upload\Providers\AmazonS3($awsS3Config, $s3Config);
+        },
+    ],   
+    'url'    => [
+        'provider' => function () {
+            $imgIxConfig = config('nodes.assets.providers.imgix');
+
+            return new \Nodes\Assets\Url\Providers\ImgIX($imgIxConfig);
+        },
+    ],
+
+```
+
+Make sure to have .env setup
+
+```.dotenv
+AMAZON_BUCKET=bucket
+AMAZON_KEY=key
+AMAZON_SECRET=secret
+AMAZON_REGION=eu-west-1
+CDN_BASE_URL=nodes-cdn-development.imgix.net
+
+```
+
+### Vapor Cloud
+
+In general.php config
+
+```php
+
+<?php
+
+return [
+   
+    'upload' => [
+        'provider' => function () {
+            $s3Config = config('filesystems.disks.s3');
+            $vaporCloudConfig = config('nodes.assets.providers.vapor-cloud');
+
+            return new \Nodes\Assets\Upload\Providers\VaporCloud($s3Config, $vaporCloudConfig);
+        },
+    ],
+
+    'url'    => [
+        'provider' => function () {
+            $vaporCloudConfig = config('nodes.assets.providers.vapor-cloud');
+
+            return new \Nodes\Assets\Url\Providers\VaporCloud($vaporCloudConfig);
+        },
+    ],
+];
+
+
+```
+
+
+Make sure to have .env setup
+
+```dotenv
+AMAZON_BUCKET=bucket
+AMAZON_KEY=key
+AMAZON_SECRET=secret
+AMAZON_REGION=eu-west-1
+AMAZON_CLOUDFRONT_URL={insert imgix base url here locally}
+AMAZON_CLOUDFRONT_URL_DATA={insert imgix base url here locally}
+
+```
+
 ### Public Folder
 
 Public folder method can resize images. To setup, you need Intervention image lib. To install run
