@@ -74,7 +74,7 @@ return [
                    DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $filePath['basename'];
         } else {
             // Download and data folder path
-            return $schema . $config['cdnRawUrl'] . $this->config['appName'] .
+            return $schema . $config['cdnRawUrl'] . $config['appName'] .
                    DIRECTORY_SEPARATOR . $fileType . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR .
                    $filePath['basename'];
         }
