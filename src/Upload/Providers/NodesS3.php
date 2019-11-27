@@ -22,7 +22,7 @@ class NodesS3 extends AmazonS3
      */
     public function __construct(array $s3Config, array $nodesConfig)
     {
-        parent::__construct($s3Config);
+        parent::__construct($nodesConfig, $s3Config);
     }
 
     /**
