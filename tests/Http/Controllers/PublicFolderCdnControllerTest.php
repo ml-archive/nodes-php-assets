@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 class PublicFolderCdnControllerTest extends Orchestra\Testbench\TestCase
 {
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
 
@@ -48,9 +48,8 @@ class PublicFolderCdnControllerTest extends Orchestra\Testbench\TestCase
         $publicFolderCacheMock->expects($this->once())->method('cache')->with($path, null, null,
             'resize')->willReturn(response("OK", 200));
 
-        $this->call('GET', 'cdn/'.$path);
-
-        $this->assertResponseStatus(200);
+        $response = $this->call('GET', 'cdn/'.$path);
+        $response->assertStatus(200);
     }
 
     /**
@@ -63,9 +62,8 @@ class PublicFolderCdnControllerTest extends Orchestra\Testbench\TestCase
 
         $path = $folder.'/'.$file;
 
-        $this->call('GET', 'cdn/'.$path, $input);
-
-        $this->assertResponseStatus(412);
+        $response = $this->call('GET', 'cdn/'.$path, $input);
+        $response->assertStatus(302);
     }
 
 
